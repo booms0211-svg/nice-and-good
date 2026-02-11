@@ -1,3 +1,4 @@
+
 class LottoBall extends HTMLElement {
     constructor() {
         super();
@@ -43,6 +44,31 @@ customElements.define('lotto-ball', LottoBall);
 const generateBtn = document.getElementById('generate-btn');
 const numbersDisplay = document.getElementById('numbers-display');
 const historyList = document.getElementById('history-list');
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const body = document.body;
+
+const applyTheme = (theme) => {
+    if (theme === 'dark') {
+        body.classList.add('dark-theme');
+        themeToggleBtn.textContent = 'Switch to Light Mode';
+    } else {
+        body.classList.remove('dark-theme');
+        themeToggleBtn.textContent = 'Switch to Dark Mode';
+    }
+};
+
+const toggleTheme = () => {
+    const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+};
+
+// Apply saved theme on initial load
+const savedTheme = localStorage.getItem('theme') || 'light';
+applyTheme(savedTheme);
+
+themeToggleBtn.addEventListener('click', toggleTheme);
 
 const generateNumbers = () => {
     const numbers = new Set();
@@ -78,3 +104,4 @@ generateBtn.addEventListener('click', handleGenerateClick);
 
 // Initial generation
 handleGenerateClick();
+
