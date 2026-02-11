@@ -77,7 +77,7 @@ lotto-ball {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#generate-btn, #theme-toggle-btn {
+#generate-btn {
     padding: 1rem 2rem;
     font-size: 1.2rem;
     color: white;
@@ -87,7 +87,23 @@ lotto-ball {
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 0.5rem; /* Add some margin for spacing between buttons */
+    margin: 0.5rem;
+}
+
+#theme-toggle-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.8rem 1.5rem; /* Adjust padding for better look */
+    font-size: 1rem; /* Adjust font size */
+    color: white;
+    background-color: var(--button-bg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 #generate-btn:hover, #theme-toggle-btn:hover {
