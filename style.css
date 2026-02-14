@@ -229,3 +229,12 @@ h2 {
 .contact-form button[type="submit"]:hover {
     background-color: var(--button-hover-bg);
 }
+
+/* Disqus Comment Section */
+.disqus-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+#disqus_thread {
+    text-align: left;
+}
