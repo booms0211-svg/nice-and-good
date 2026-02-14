@@ -63,7 +63,7 @@ body {
     background-color: var(--button-hover-bg);
 }
 
-.container, .contact-form-container {
+.container, .contact-form-container, .disqus-container {
     background-color: var(--container-bg);
     padding: 2rem;
     border-radius: 1rem;
@@ -74,7 +74,7 @@ body {
     max-width: 500px; /* Set a max-width */
 }
 
-.contact-form-container {
+.contact-form-container, .disqus-container {
     margin-top: 2rem;
 }
 
