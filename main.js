@@ -1,48 +1,7 @@
 
-class LottoBall extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
-
-    connectedCallback() {
-        const number = this.getAttribute('number');
-        const color = this.getColor(number);
-
-        this.shadowRoot.innerHTML = `
-            <style>
-                .ball {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: white;
-                    background-color: ${color};
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                }
-            </style>
-            <div class="ball">${number}</div>
-        `;
-    }
-
-    getColor(number) {
-        const num = parseInt(number);
-        if (num <= 10) return '#f59e0b'; // Yellow
-        if (num <= 20) return '#3b82f6'; // Blue
-        if (num <= 30) return '#ef4444'; // Red
-        if (num <= 40) return '#22c55e'; // Green
-        return '#a855f7'; // Purple
-    }
-}
-
-customElements.define('lotto-ball', LottoBall);
-
-const generateBtn = document.getElementById('generate-btn');
-const numbersDisplay = document.getElementById('numbers-display');
+const recommendBtn = document.getElementById('recommend-btn');
+const mealDisplay = document.getElementById('meal-display');
+const recommendedMealSpan = document.getElementById('recommended-meal');
 const historyList = document.getElementById('history-list');
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const body = document.body;
@@ -70,38 +29,36 @@ applyTheme(savedTheme);
 
 themeToggleBtn.addEventListener('click', toggleTheme);
 
-const generateNumbers = () => {
-    const numbers = new Set();
-    while (numbers.size < 6) {
-        const randomNumber = Math.floor(Math.random() * 45) + 1;
-        numbers.add(randomNumber);
-    }
-    return Array.from(numbers).sort((a, b) => a - b);
+const dinnerMenus = [
+    "김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음",
+    "삼겹살", "갈비찜", "닭갈비", "순두부찌개", "부대찌개",
+    "초밥", "파스타", "피자", "스테이크", "돈까스",
+    "샌드위치", "샐러드", "카레", "짜장면", "짬뽕"
+];
+
+const recommendMeal = () => {
+    const randomIndex = Math.floor(Math.random() * dinnerMenus.length);
+    return dinnerMenus[randomIndex];
 };
 
-const displayNumbers = (numbers) => {
-    numbersDisplay.innerHTML = '';
-    numbers.forEach(number => {
-        const lottoBall = document.createElement('lotto-ball');
-        lottoBall.setAttribute('number', number);
-        numbersDisplay.appendChild(lottoBall);
-    });
+const displayMeal = (meal) => {
+    recommendedMealSpan.textContent = meal;
 };
 
-const addToHistory = (numbers) => {
+const addToHistory = (meal) => {
     const listItem = document.createElement('li');
-    listItem.textContent = numbers.join(', ');
+    listItem.textContent = meal;
     historyList.prepend(listItem);
 };
 
-const handleGenerateClick = () => {
-    const numbers = generateNumbers();
-    displayNumbers(numbers);
-    addToHistory(numbers);
+const handleRecommendClick = () => {
+    const meal = recommendMeal();
+    displayMeal(meal);
+    addToHistory(meal);
 };
 
-generateBtn.addEventListener('click', handleGenerateClick);
+recommendBtn.addEventListener('click', handleRecommendClick);
 
-// Initial generation
-handleGenerateClick();
+// Initial recommendation
+handleRecommendClick();
 

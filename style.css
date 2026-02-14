@@ -57,37 +57,60 @@ h1 {
     margin-bottom: 2rem;
 }
 
-.numbers-display {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
 
-lotto-ball {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+
+.meal-display {
+
     display: flex;
+
     justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
+
+    align-items: center; /* Center vertically */
+
+    padding: 1.5rem; /* Add some padding */
+
+    font-size: 2rem; /* Make the meal name larger */
+
     font-weight: bold;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    color: var(--text-color); /* Use text color variable */
+
+    background-color: var(--container-bg); /* Use container background color */
+
+    border-radius: 0.5rem;
+
+    min-height: 80px; /* Ensure a minimum height */
+
+    margin-bottom: 2rem;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
 }
 
-#generate-btn {
+
+
+#recommend-btn {
+
     padding: 1rem 2rem;
+
     font-size: 1.2rem;
+
     color: white;
+
     background-color: var(--button-bg);
+
     border: none;
+
     border-radius: 0.5rem;
+
     cursor: pointer;
+
     transition: background-color 0.3s;
+
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     margin: 0.5rem;
+
 }
 
 #theme-toggle-btn {
