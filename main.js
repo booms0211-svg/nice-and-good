@@ -68,7 +68,7 @@ const recommendMeal = () => {
 const displayMeal = (meal) => {
     recommendedMealSpan.textContent = meal;
     const mealImageName = meal.toLowerCase().replace(/ /g, '_') + '.jpg';
-    mealImage.src = `images/${mealImageName}`;
+    mealImage.src = `/nice-and-good/images/${mealImageName}`;
     mealImage.alt = meal;
     mealImage.style.display = 'block';
 };
