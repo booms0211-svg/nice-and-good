@@ -65,12 +65,17 @@ const recommendMeal = () => {
     return dinnerMenus[randomIndex];
 };
 
-const displayMeal = (meal) => {
+const displayMeal = async (meal) => {
     recommendedMealSpan.textContent = meal;
-    const mealImageName = meal.toLowerCase().replace(/ /g, '_') + '.jpg';
-    mealImage.src = `/nice-and-good/images/${mealImageName}`;
-    mealImage.alt = meal;
-    mealImage.style.display = 'block';
+    try {
+        const response = await fetch(`https://source.unsplash.com/random/800x600/?${meal}`);
+        mealImage.src = response.url;
+        mealImage.alt = meal;
+        mealImage.style.display = 'block';
+    } catch (error) {
+        console.error('Error fetching image:', error);
+        mealImage.style.display = 'none';
+    }
 };
 
 const addToHistory = (meal) => {
@@ -79,9 +84,9 @@ const addToHistory = (meal) => {
     historyList.prepend(listItem);
 };
 
-const handleRecommendClick = () => {
+const handleRecommendClick = async () => {
     const meal = recommendMeal();
-    displayMeal(meal);
+    await displayMeal(meal);
     addToHistory(meal);
 };
 
@@ -89,6 +94,6 @@ recommendBtn.addEventListener('click', handleRecommendClick);
 
 // Initial load
 const savedLanguage = localStorage.getItem('language') || 'ko';
-loadTranslations(savedLanguage).then(() => {
-    handleRecommendClick();
+loadTranslations(savedLanguage).then(async () => {
+    await handleRecommendClick();
 });
