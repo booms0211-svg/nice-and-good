@@ -1,4 +1,3 @@
-
 {
   "title": "Dinner Menu Recommender",
   "h1": "What should I eat for dinner tonight?",
@@ -7,6 +6,12 @@
   "history": "History",
   "theme_toggle_light": "Switch to Light Mode",
   "theme_toggle_dark": "Switch to Dark Mode",
+  "contact_inquiry": "Partnership Inquiry",
+  "contact_description": "Thank you for your interest in our service. Please fill out the form below if you'd like to partner with us.",
+  "name_label": "Name:",
+  "email_label": "Email:",
+  "message_label": "Message:",
+  "submit_button": "Submit",
   "dinner_menus": [
     "Kimchi Jjigae", "Doenjang Jjigae", "Bibimbap", "Bulgogi", "Jeyuk Bokkeum",
     "Samgyeopsal", "Galbi Jjim", "Dak Galbi", "Sundubu Jjigae", "Budae Jjigae",

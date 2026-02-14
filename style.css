@@ -27,11 +27,21 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 2rem;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1100px;
+    align-items: flex-start;
 }
 
 .top-bar {
@@ -61,16 +71,16 @@ body {
     background-color: var(--button-hover-bg);
 }
 
-.container {
+.container, .contact-form-container {
     background-color: var(--container-bg);
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 90%;
-    max-width: 500px;
     transition: background-color 0.3s ease;
+    flex: 1;
 }
+
 
 h1 {
     margin-bottom: 2rem;
@@ -170,16 +180,9 @@ h2 {
 }
 
 /* Contact Form Styles */
-.contact-form-container {
-    background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
-    margin-top: 2rem;
-    transition: background-color 0.3s ease;
+.contact-form-container p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
 }
 
 .contact-form {
@@ -228,4 +231,10 @@ h2 {
 
 .contact-form button[type="submit"]:hover {
     background-color: var(--button-hover-bg);
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
 }

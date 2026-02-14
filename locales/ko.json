@@ -1,4 +1,3 @@
-
 {
   "title": "저녁 메뉴 추천",
   "h1": "오늘 저녁 뭐 먹지?",
@@ -7,6 +6,12 @@
   "history": "추천 기록",
   "theme_toggle_light": "라이트 모드로 변경",
   "theme_toggle_dark": "다크 모드로 변경",
+  "contact_inquiry": "제휴 문의",
+  "contact_description": "저희 서비스에 관심을 가져주셔서 감사합니다. 파트너십을 원하시면 아래 양식을 작성해주세요.",
+  "name_label": "이름:",
+  "email_label": "이메일:",
+  "message_label": "메시지:",
+  "submit_button": "보내기",
   "dinner_menus": [
     "김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음",
     "삼겹살", "갈비찜", "닭갈비", "순두부찌개", "부대찌개",
