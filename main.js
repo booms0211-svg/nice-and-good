@@ -1,18 +1,23 @@
-
 const recommendBtn = document.getElementById('recommend-btn');
 const mealDisplay = document.getElementById('meal-display');
 const recommendedMealSpan = document.getElementById('recommended-meal');
+const mealImage = document.getElementById('meal-image');
 const historyList = document.getElementById('history-list');
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const body = document.body;
+const langKoBtn = document.getElementById('lang-ko');
+const langEnBtn = document.getElementById('lang-en');
+
+let dinnerMenus = [];
+let translations = {};
 
 const applyTheme = (theme) => {
     if (theme === 'dark') {
         body.classList.add('dark-theme');
-        themeToggleBtn.textContent = 'Switch to Light Mode';
+        themeToggleBtn.textContent = translations.theme_toggle_light;
     } else {
         body.classList.remove('dark-theme');
-        themeToggleBtn.textContent = 'Switch to Dark Mode';
+        themeToggleBtn.textContent = translations.theme_toggle_dark;
     }
 };
 
@@ -23,18 +28,37 @@ const toggleTheme = () => {
     applyTheme(newTheme);
 };
 
+const applyTranslations = () => {
+    document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        elem.textContent = translations[key];
+    });
+    document.title = translations.title;
+    dinnerMenus = translations.dinner_menus;
+};
+
+const loadTranslations = async (lang) => {
+    const response = await fetch(`locales/${lang}.json`);
+    translations = await response.json();
+    applyTranslations();
+    // Re-apply theme to update button text
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+};
+
+const setLanguage = (lang) => {
+    localStorage.setItem('language', lang);
+    loadTranslations(lang);
+};
+
+langKoBtn.addEventListener('click', () => setLanguage('ko'));
+langEnBtn.addEventListener('click', () => setLanguage('en'));
+
 // Apply saved theme on initial load
 const savedTheme = localStorage.getItem('theme') || 'light';
 applyTheme(savedTheme);
 
 themeToggleBtn.addEventListener('click', toggleTheme);
-
-const dinnerMenus = [
-    "김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음",
-    "삼겹살", "갈비찜", "닭갈비", "순두부찌개", "부대찌개",
-    "초밥", "파스타", "피자", "스테이크", "돈까스",
-    "샌드위치", "샐러드", "카레", "짜장면", "짬뽕"
-];
 
 const recommendMeal = () => {
     const randomIndex = Math.floor(Math.random() * dinnerMenus.length);
@@ -43,6 +67,10 @@ const recommendMeal = () => {
 
 const displayMeal = (meal) => {
     recommendedMealSpan.textContent = meal;
+    const mealImageName = meal.toLowerCase().replace(/ /g, '_') + '.jpg';
+    mealImage.src = `images/${mealImageName}`;
+    mealImage.alt = meal;
+    mealImage.style.display = 'block';
 };
 
 const addToHistory = (meal) => {
@@ -59,6 +87,8 @@ const handleRecommendClick = () => {
 
 recommendBtn.addEventListener('click', handleRecommendClick);
 
-// Initial recommendation
-handleRecommendClick();
-
+// Initial load
+const savedLanguage = localStorage.getItem('language') || 'ko';
+loadTranslations(savedLanguage).then(() => {
+    handleRecommendClick();
+});

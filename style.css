@@ -35,6 +35,33 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.top-bar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+#lang-switcher {
+    margin-right: 1rem;
+}
+
+#lang-switcher button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: white;
+    background-color: var(--button-bg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#lang-switcher button:hover {
+    background-color: var(--button-hover-bg);
+}
+
 .container {
     background-color: var(--container-bg);
     padding: 2rem;
@@ -57,66 +84,44 @@ h1 {
     margin-bottom: 2rem;
 }
 
-
-
 .meal-display {
-
     display: flex;
-
+    flex-direction: column;
     justify-content: center;
-
     align-items: center; /* Center vertically */
-
     padding: 1.5rem; /* Add some padding */
-
     font-size: 2rem; /* Make the meal name larger */
-
     font-weight: bold;
-
     color: var(--text-color); /* Use text color variable */
-
     background-color: var(--container-bg); /* Use container background color */
-
     border-radius: 0.5rem;
-
     min-height: 80px; /* Ensure a minimum height */
-
     margin-bottom: 2rem;
-
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
 }
 
-
+#meal-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
 
 #recommend-btn {
-
     padding: 1rem 2rem;
-
     font-size: 1.2rem;
-
     color: white;
-
     background-color: var(--button-bg);
-
     border: none;
-
     border-radius: 0.5rem;
-
     cursor: pointer;
-
     transition: background-color 0.3s;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
     margin: 0.5rem;
-
 }
 
 #theme-toggle-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     padding: 0.8rem 1.5rem; /* Adjust padding for better look */
     font-size: 1rem; /* Adjust font size */
     color: white;

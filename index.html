@@ -8,15 +8,24 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="theme-toggle-btn">Toggle Theme</button>
+    <div class="top-bar">
+        <div id="lang-switcher">
+            <button id="lang-ko">한국어</button>
+            <button id="lang-en">English</button>
+        </div>
+        <button id="theme-toggle-btn" data-i18n="theme_toggle_dark">Toggle Theme</button>
+    </div>
     <div class="container">
-        <h1>오늘 저녁 뭐 먹지?</h1>
+        <h1 data-i18n="h1">오늘 저녁 뭐 먹지?</h1>
         <div class="generator-container">
-            <div id="meal-display" class="meal-display"><span id="recommended-meal">추천 메뉴</span></div>
-            <button id="recommend-btn">메뉴 추천 받기</button>
+            <div id="meal-display" class="meal-display">
+                <img id="meal-image" src="" alt="Recommended Meal Image" style="display: none;">
+                <span id="recommended-meal" data-i18n="recommended_meal">추천 메뉴</span>
+            </div>
+            <button id="recommend-btn" data-i18n="recommend_btn">메뉴 추천 받기</button>
         </div>
         <div class="history-container">
-            <h2>추천 기록</h2>
+            <h2 data-i18n="history">추천 기록</h2>
             <ul id="history-list"></ul>
         </div>
     </div>

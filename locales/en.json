@@ -1,0 +1,16 @@
+
+{
+  "title": "Dinner Menu Recommender",
+  "h1": "What should I eat for dinner tonight?",
+  "recommended_meal": "Recommended Meal",
+  "recommend_btn": "Get Recommendation",
+  "history": "History",
+  "theme_toggle_light": "Switch to Light Mode",
+  "theme_toggle_dark": "Switch to Dark Mode",
+  "dinner_menus": [
+    "Kimchi Jjigae", "Doenjang Jjigae", "Bibimbap", "Bulgogi", "Jeyuk Bokkeum",
+    "Samgyeopsal", "Galbi Jjim", "Dak Galbi", "Sundubu Jjigae", "Budae Jjigae",
+    "Sushi", "Pasta", "Pizza", "Steak", "Donkatsu",
+    "Sandwich", "Salad", "Curry", "Jajangmyeon", "Jjamppong"
+  ]
+}
