@@ -227,6 +227,14 @@ h2 {
     background-color: var(--button-hover-bg);
 }
 
+/* Ad Container */
+.ad-container {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
 /* Disqus Comment Section */
 .disqus-container h2 {
     margin-bottom: 1.5rem;
