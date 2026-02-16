@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://booms0211-svg.github.io/nice-and-good/sitemap.xml

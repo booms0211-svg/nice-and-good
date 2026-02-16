@@ -1,77 +1,220 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dinner Menu Recommender</title>
+    <title>오늘 저녁 뭐 먹지? - 저녁 메뉴 추천</title>
+    <meta name="description" content="매일 저녁 메뉴 고민 끝! 버튼 하나로 다양한 저녁 메뉴를 랜덤 추천받으세요. 한식, 양식, 중식 등 다양한 카테고리 지원.">
+    <meta property="og:title" content="오늘 저녁 뭐 먹지? - 저녁 메뉴 추천">
+    <meta property="og:description" content="매일 저녁 메뉴 고민 끝! 버튼 하나로 다양한 저녁 메뉴를 랜덤 추천받으세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://booms0211-svg.github.io/nice-and-good/">
+    <link rel="canonical" href="https://booms0211-svg.github.io/nice-and-good/">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
     <link rel="stylesheet" href="style.css">
     <meta name="google-adsense-account" content="ca-pub-2315053959173850">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2315053959173850"
          crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "오늘 저녁 뭐 먹지?",
+        "description": "매일 저녁 메뉴 고민을 해결해주는 무료 랜덤 메뉴 추천 서비스",
+        "url": "https://booms0211-svg.github.io/nice-and-good/",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+        },
+        "inLanguage": ["ko", "en"]
+    }
+    </script>
 </head>
 
 <body>
-    <div class="top-bar">
-        <button id="lang-toggle">English</button>
-        <button id="theme-toggle-btn" data-i18n="theme_toggle_dark">Toggle Theme</button>
-    </div>
-    <div class="container">
-        <h1 data-i18n="h1">오늘 저녁 뭐 먹지?</h1>
-        <div class="generator-container">
-            <div id="meal-display" class="meal-display">
-                <img id="meal-image" src="" alt="Recommended Meal Image" style="display: none;">
-                <span id="recommended-meal" data-i18n="recommended_meal">추천 메뉴</span>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo" data-i18n="h1">오늘 저녁 뭐 먹지?</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="site-nav" id="site-nav">
+                <a href="index.html" class="nav-link active" data-i18n="nav_home">홈</a>
+                <a href="tips.html" class="nav-link" data-i18n="nav_tips">꿀팁 가이드</a>
+                <a href="about.html" class="nav-link" data-i18n="nav_about">소개</a>
+                <a href="#contact" class="nav-link" data-i18n="nav_contact">문의</a>
+            </nav>
+            <div class="header-actions">
+                <button id="lang-toggle">English</button>
+                <button id="theme-toggle-btn" data-i18n="theme_toggle_dark">다크 모드로 전환</button>
             </div>
-            <button id="recommend-btn" data-i18n="recommend_btn">메뉴 추천 받기</button>
         </div>
-        <div class="history-container">
-            <h2 data-i18n="history">추천 기록</h2>
-            <ul id="history-list"></ul>
+    </header>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="container">
+                <h1 data-i18n="h1">오늘 저녁 뭐 먹지?</h1>
+                <p class="intro-text" data-i18n="intro_desc">매일 저녁 메뉴 고르기가 어려우신가요? '오늘 저녁 뭐 먹지?'는 버튼 하나로 다양한 저녁 메뉴를 랜덤 추천해드리는 서비스입니다.</p>
+            </div>
+        </section>
+
+        <section class="recommender-section">
+            <div class="container">
+                <div class="generator-container">
+                    <div id="meal-display" class="meal-display">
+                        <img id="meal-image" src="" alt="Recommended Meal Image" style="display: none;">
+                        <span id="recommended-meal" data-i18n="recommended_meal">추천 메뉴</span>
+                    </div>
+                    <button id="recommend-btn" data-i18n="recommend_btn">메뉴 추천 받기</button>
+                </div>
+                <div class="history-container">
+                    <h2 data-i18n="history">추천 내역</h2>
+                    <ul id="history-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="howto-section">
+            <div class="container">
+                <h2 data-i18n="howto_title">사용 방법</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3 data-i18n="howto_step1_title">1단계: 추천 버튼 클릭</h3>
+                        <p data-i18n="howto_step1_desc">페이지 상단의 '메뉴 추천 받기' 버튼을 클릭하면 한식, 양식, 중식, 일식 등 다양한 카테고리에서 랜덤으로 메뉴가 추천됩니다.</p>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="howto_step2_title">2단계: 추천 결과 확인</h3>
+                        <p data-i18n="howto_step2_desc">추천된 메뉴가 화면 중앙에 크게 표시됩니다. 마음에 들지 않으면 버튼을 다시 눌러 다른 메뉴를 받아보세요.</p>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="howto_step3_title">3단계: 추천 내역 활용</h3>
+                        <p data-i18n="howto_step3_desc">추천받은 메뉴는 아래 추천 내역에 자동 저장됩니다. 이전에 어떤 메뉴를 추천받았는지 확인하고 식단 계획에 활용하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="target-section">
+            <div class="container">
+                <h2 data-i18n="target_title">이런 분께 추천해요</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3 data-i18n="target_1_title">매일 메뉴 고민하는 직장인</h3>
+                        <p data-i18n="target_1_desc">퇴근 후 뭘 먹을지 고민하는 시간을 줄여보세요.</p>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="target_2_title">요리 레퍼토리를 넓히고 싶은 분</h3>
+                        <p data-i18n="target_2_desc">항상 같은 메뉴만 먹고 계신가요? 랜덤 추천으로 새로운 메뉴에 도전해보세요.</p>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="target_3_title">가족 저녁 식사를 준비하는 분</h3>
+                        <p data-i18n="target_3_desc">온 가족이 만족할 저녁 메뉴를 고르기 어려울 때, 추천 기능으로 쉽게 결정하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2315053959173850"
+                 data-ad-slot="auto"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-    </div>
 
-    <div class="ad-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2315053959173850"
-             data-ad-slot="auto"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+        <section class="tips-preview-section">
+            <div class="container">
+                <h2 data-i18n="quick_tips_title">저녁 메뉴 고르는 팁</h2>
+                <div class="tips-list">
+                    <div class="tip-item">
+                        <h3 data-i18n="quick_tip_1_title">계절 식재료를 활용하세요</h3>
+                        <p data-i18n="quick_tip_1_desc">제철 재료는 맛도 좋고 가격도 저렴합니다.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3 data-i18n="quick_tip_2_title">영양 균형을 생각하세요</h3>
+                        <p data-i18n="quick_tip_2_desc">단백질, 탄수화물, 채소를 골고루 포함한 메뉴를 선택하면 건강한 저녁 식사가 됩니다.</p>
+                    </div>
+                    <div class="tip-item">
+                        <h3 data-i18n="quick_tip_3_title">조리 시간도 고려하세요</h3>
+                        <p data-i18n="quick_tip_3_desc">바쁜 날에는 15분 이내 완성 가능한 간단 요리를, 여유로운 날에는 정성 들인 요리에 도전해보세요.</p>
+                    </div>
+                </div>
+                <a href="tips.html" class="cta-link" data-i18n="more_tips_link">더 많은 꿀팁 보기 →</a>
+            </div>
+        </section>
 
-    <div class="contact-form-container">
-        <h2 data-i18n="contact_inquiry">제휴 문의</h2>
-        <p data-i18n="contact_description">저희 서비스에 관심을 가져주셔서 감사합니다. 파트너십을 원하시면 아래 양식을 작성해주세요.</p>
-        <form action="https://formspree.io/f/xpqjdqbj" method="POST" class="contact-form">
-            <label for="name" data-i18n="name_label">이름:</label>
-            <input type="text" id="name" name="name" required>
+        <section class="faq-section">
+            <div class="container">
+                <h2 data-i18n="faq_title">자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3 data-i18n="faq_1_q">Q. 메뉴 추천은 무료인가요?</h3>
+                        <p data-i18n="faq_1_a">네, 완전히 무료입니다. 회원가입도 필요 없으며, 접속하자마자 바로 메뉴 추천을 받을 수 있습니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 data-i18n="faq_2_q">Q. 어떤 종류의 메뉴가 추천되나요?</h3>
+                        <p data-i18n="faq_2_a">김치찌개, 비빔밥 같은 한식부터 파스타, 스테이크 같은 양식, 짜장면, 짬뽕 같은 중식, 그리고 초밥, 돈까스 같은 일식까지 다양한 카테고리의 메뉴가 추천됩니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 data-i18n="faq_3_q">Q. 추천 내역은 저장되나요?</h3>
+                        <p data-i18n="faq_3_a">현재 세션 동안의 추천 내역은 화면에 표시됩니다. 페이지를 새로고침하면 내역이 초기화되므로, 마음에 드는 메뉴는 메모해두시는 것을 추천드립니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 data-i18n="faq_4_q">Q. 모바일에서도 사용할 수 있나요?</h3>
+                        <p data-i18n="faq_4_a">네, 모바일 환경에 최적화되어 있어 스마트폰, 태블릿 등 어떤 기기에서든 편리하게 사용하실 수 있습니다.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 data-i18n="faq_5_q">Q. 다크 모드는 어떻게 켜나요?</h3>
+                        <p data-i18n="faq_5_a">화면 상단의 '다크 모드로 전환' 버튼을 클릭하면 다크 모드로 전환됩니다. 설정은 다음 방문 시에도 유지됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            <label for="email" data-i18n="email_label">이메일:</label>
-            <input type="email" id="email" name="_replyto" required>
+        <section class="contact-form-container" id="contact">
+            <div class="container">
+                <h2 data-i18n="contact_inquiry">제휴 문의</h2>
+                <p data-i18n="contact_description">저희 서비스에 관심을 가져주셔서 감사합니다. 파트너십을 원하시면 아래 양식을 작성해주세요.</p>
+                <form action="https://formspree.io/f/xpqjdqbj" method="POST" class="contact-form">
+                    <label for="name" data-i18n="name_label">이름:</label>
+                    <input type="text" id="name" name="name" required>
 
-            <label for="message" data-i18n="message_label">메시지:</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+                    <label for="email" data-i18n="email_label">이메일:</label>
+                    <input type="email" id="email" name="_replyto" required>
 
-            <button type="submit" data-i18n="submit_button">보내기</button>
-        </form>
-    </div>
+                    <label for="message" data-i18n="message_label">메시지:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
 
-    <div class="ad-container">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2315053959173850"
-             data-ad-slot="auto"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
+                    <button type="submit" data-i18n="submit_button">보내기</button>
+                </form>
+            </div>
+        </section>
 
-    <div class="disqus-container">
-        <h2 data-i18n="comments_heading">댓글</h2>
-        <div id="disqus_thread"></div>
-    </div>
+        <section class="disqus-container">
+            <div class="container">
+                <h2 data-i18n="comments_heading">댓글</h2>
+                <div id="disqus_thread"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <nav class="footer-nav">
+                <a href="index.html" data-i18n="nav_home">홈</a>
+                <a href="tips.html" data-i18n="nav_tips">꿀팁 가이드</a>
+                <a href="about.html" data-i18n="footer_about">소개</a>
+                <a href="privacy.html" data-i18n="footer_privacy">개인정보처리방침</a>
+            </nav>
+            <p class="copyright" data-i18n="footer_copyright">&copy; 2026 오늘 저녁 뭐 먹지? All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="main.js" type="module"></script>
     <script>
@@ -89,4 +232,3 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>
-

@@ -1,22 +1,38 @@
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const body = document.body;
+const langToggleBtn = document.getElementById('lang-toggle');
+const navToggle = document.getElementById('nav-toggle');
+const siteNav = document.getElementById('site-nav');
+
+// Page-specific elements (may not exist on all pages)
 const recommendBtn = document.getElementById('recommend-btn');
 const mealDisplay = document.getElementById('meal-display');
 const recommendedMealSpan = document.getElementById('recommended-meal');
 const mealImage = document.getElementById('meal-image');
 const historyList = document.getElementById('history-list');
-const themeToggleBtn = document.getElementById('theme-toggle-btn');
-const body = document.body;
-const langToggleBtn = document.getElementById('lang-toggle');
 
 let dinnerMenus = [];
 let translations = {};
 
+// Mobile nav toggle
+if (navToggle && siteNav) {
+    navToggle.addEventListener('click', () => {
+        siteNav.classList.toggle('open');
+        navToggle.classList.toggle('open');
+    });
+}
+
 const applyTheme = (theme) => {
     if (theme === 'dark') {
         body.classList.add('dark-theme');
-        themeToggleBtn.textContent = translations.theme_toggle_light;
+        if (themeToggleBtn && translations.theme_toggle_light) {
+            themeToggleBtn.textContent = translations.theme_toggle_light;
+        }
     } else {
         body.classList.remove('dark-theme');
-        themeToggleBtn.textContent = translations.theme_toggle_dark;
+        if (themeToggleBtn && translations.theme_toggle_dark) {
+            themeToggleBtn.textContent = translations.theme_toggle_dark;
+        }
     }
 };
 
@@ -30,23 +46,39 @@ const toggleTheme = () => {
 const applyTranslations = () => {
     document.querySelectorAll('[data-i18n]').forEach(elem => {
         const key = elem.getAttribute('data-i18n');
-        elem.textContent = translations[key];
+        if (translations[key]) {
+            elem.textContent = translations[key];
+        }
     });
-    document.title = translations.title;
-    dinnerMenus = translations.dinner_menus;
+
+    // Update page title based on page-specific title keys
+    const pageTitleKey = document.querySelector('[data-page-title]');
+    if (pageTitleKey) {
+        const key = pageTitleKey.getAttribute('data-page-title');
+        if (translations[key]) {
+            document.title = translations[key];
+        }
+    } else {
+        document.title = translations.title || document.title;
+    }
+
+    if (translations.dinner_menus) {
+        dinnerMenus = translations.dinner_menus;
+    }
 };
 
 const loadTranslations = async (lang) => {
     const response = await fetch(`locales/${lang}.json`);
     translations = await response.json();
     applyTranslations();
-    // Re-apply theme to update button text
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 };
 
 const updateLangButton = (lang) => {
-    langToggleBtn.textContent = lang === 'ko' ? 'English' : '한국어';
+    if (langToggleBtn) {
+        langToggleBtn.textContent = lang === 'ko' ? 'English' : '한국어';
+    }
 };
 
 const setLanguage = (lang) => {
@@ -60,49 +92,63 @@ const toggleLanguage = () => {
     setLanguage(current === 'ko' ? 'en' : 'ko');
 };
 
-langToggleBtn.addEventListener('click', toggleLanguage);
+if (langToggleBtn) {
+    langToggleBtn.addEventListener('click', toggleLanguage);
+}
 
 // Apply saved theme on initial load
 const savedTheme = localStorage.getItem('theme') || 'light';
 applyTheme(savedTheme);
 
-themeToggleBtn.addEventListener('click', toggleTheme);
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', toggleTheme);
+}
 
-const recommendMeal = () => {
-    const randomIndex = Math.floor(Math.random() * dinnerMenus.length);
-    return dinnerMenus[randomIndex];
-};
+// Recommender functionality (only on index page)
+if (recommendBtn && recommendedMealSpan && historyList) {
+    const recommendMeal = () => {
+        const randomIndex = Math.floor(Math.random() * dinnerMenus.length);
+        return dinnerMenus[randomIndex];
+    };
 
-const displayMeal = async (meal) => {
-    recommendedMealSpan.textContent = meal;
-    try {
-        const response = await fetch(`https://source.unsplash.com/random/800x600/?${meal}`);
-        mealImage.src = response.url;
-        mealImage.alt = meal;
-        mealImage.style.display = 'block';
-    } catch (error) {
-        console.error('Error fetching image:', error);
-        mealImage.style.display = 'none';
-    }
-};
+    const displayMeal = async (meal) => {
+        recommendedMealSpan.textContent = meal;
+        if (mealImage) {
+            try {
+                const response = await fetch(`https://source.unsplash.com/random/800x600/?${meal}`);
+                mealImage.src = response.url;
+                mealImage.alt = meal;
+                mealImage.style.display = 'block';
+            } catch (error) {
+                console.error('Error fetching image:', error);
+                mealImage.style.display = 'none';
+            }
+        }
+    };
 
-const addToHistory = (meal) => {
-    const listItem = document.createElement('li');
-    listItem.textContent = meal;
-    historyList.prepend(listItem);
-};
+    const addToHistory = (meal) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = meal;
+        historyList.prepend(listItem);
+    };
 
-const handleRecommendClick = async () => {
-    const meal = recommendMeal();
-    await displayMeal(meal);
-    addToHistory(meal);
-};
+    const handleRecommendClick = async () => {
+        const meal = recommendMeal();
+        await displayMeal(meal);
+        addToHistory(meal);
+    };
 
-recommendBtn.addEventListener('click', handleRecommendClick);
+    recommendBtn.addEventListener('click', handleRecommendClick);
 
-// Initial load
-const savedLanguage = localStorage.getItem('language') || 'ko';
-updateLangButton(savedLanguage);
-loadTranslations(savedLanguage).then(async () => {
-    await handleRecommendClick();
-});
+    // Initial load with recommendation
+    const savedLanguage = localStorage.getItem('language') || 'ko';
+    updateLangButton(savedLanguage);
+    loadTranslations(savedLanguage).then(async () => {
+        await handleRecommendClick();
+    });
+} else {
+    // Non-index pages: just load translations
+    const savedLanguage = localStorage.getItem('language') || 'ko';
+    updateLangButton(savedLanguage);
+    loadTranslations(savedLanguage);
+}
