@@ -5,8 +5,7 @@ const mealImage = document.getElementById('meal-image');
 const historyList = document.getElementById('history-list');
 const themeToggleBtn = document.getElementById('theme-toggle-btn');
 const body = document.body;
-const langKoBtn = document.getElementById('lang-ko');
-const langEnBtn = document.getElementById('lang-en');
+const langToggleBtn = document.getElementById('lang-toggle');
 
 let dinnerMenus = [];
 let translations = {};
@@ -46,13 +45,22 @@ const loadTranslations = async (lang) => {
     applyTheme(savedTheme);
 };
 
+const updateLangButton = (lang) => {
+    langToggleBtn.textContent = lang === 'ko' ? 'English' : '한국어';
+};
+
 const setLanguage = (lang) => {
     localStorage.setItem('language', lang);
     loadTranslations(lang);
+    updateLangButton(lang);
 };
 
-langKoBtn.addEventListener('click', () => setLanguage('ko'));
-langEnBtn.addEventListener('click', () => setLanguage('en'));
+const toggleLanguage = () => {
+    const current = localStorage.getItem('language') || 'ko';
+    setLanguage(current === 'ko' ? 'en' : 'ko');
+};
+
+langToggleBtn.addEventListener('click', toggleLanguage);
 
 // Apply saved theme on initial load
 const savedTheme = localStorage.getItem('theme') || 'light';
@@ -94,6 +102,7 @@ recommendBtn.addEventListener('click', handleRecommendClick);
 
 // Initial load
 const savedLanguage = localStorage.getItem('language') || 'ko';
+updateLangButton(savedLanguage);
 loadTranslations(savedLanguage).then(async () => {
     await handleRecommendClick();
 });
