@@ -12,7 +12,6 @@
   "email_label": "Email:",
   "message_label": "Message:",
   "submit_button": "Submit",
-  "comments_heading": "Comments",
   "dinner_menus": [
     "Kimchi Jjigae", "Doenjang Jjigae", "Bibimbap", "Bulgogi", "Jeyuk Bokkeum",
     "Samgyeopsal", "Galbi Jjim", "Dak Galbi", "Sundubu Jjigae", "Budae Jjigae",
@@ -102,7 +101,6 @@
   "privacy_ads_desc": "The Service displays ads through Google AdSense. Google may use cookies to serve ads based on your visits to this site and other sites. You can opt out of personalized advertising through Google Ad Settings.",
   "privacy_third_title": "4. Third-Party Services",
   "privacy_third_desc": "The Service uses the following third-party services:",
-  "privacy_third_disqus": "Disqus \u2014 provides the comment system. Disqus's own privacy policy applies.",
   "privacy_third_formspree": "Formspree \u2014 handles contact form submissions. Formspree's own privacy policy applies.",
   "privacy_third_adsense": "Google AdSense \u2014 serves advertisements. Google's own privacy policy applies.",
   "privacy_changes_title": "5. Policy Changes",

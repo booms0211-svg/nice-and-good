@@ -603,28 +603,6 @@ h2 {
     background-color: var(--button-hover-bg);
 }
 
-/* ===== Disqus ===== */
-.disqus-container {
-    padding: 2rem 0;
-}
-
-.disqus-container .container {
-    background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-    max-width: 500px;
-}
-
-.disqus-container h2 {
-    margin-bottom: 1.5rem;
-}
-
-#disqus_thread {
-    text-align: left;
-}
-
 /* ===== How-to Section ===== */
 .howto-section {
     padding: 2rem 0;

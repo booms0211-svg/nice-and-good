@@ -12,7 +12,6 @@
   "email_label": "이메일:",
   "message_label": "메시지:",
   "submit_button": "제출",
-  "comments_heading": "댓글",
   "dinner_menus": [
     "김치찌개", "된장찌개", "비빔밥", "불고기", "제육볶음",
     "삼겹살", "갈비찜", "닭갈비", "순두부찌개", "부대찌개",
@@ -102,7 +101,6 @@
   "privacy_ads_desc": "본 서비스는 Google AdSense를 통해 광고를 게재합니다. Google은 광고 제공을 위해 쿠키를 사용할 수 있으며, 이를 통해 본 사이트 및 다른 사이트 방문 기록을 기반으로 관련 광고를 표시할 수 있습니다. 사용자는 Google 광고 설정에서 맞춤 광고를 비활성화할 수 있습니다.",
   "privacy_third_title": "4. 제3자 서비스",
   "privacy_third_desc": "본 서비스는 다음 제3자 서비스를 사용합니다:",
-  "privacy_third_disqus": "Disqus \u2014 댓글 시스템 제공. Disqus의 개인정보처리방침이 별도로 적용됩니다.",
   "privacy_third_formspree": "Formspree \u2014 문의 양식 처리. Formspree의 개인정보처리방침이 별도로 적용됩니다.",
   "privacy_third_adsense": "Google AdSense \u2014 광고 게재. Google의 개인정보처리방침이 별도로 적용됩니다.",
   "privacy_changes_title": "5. 방침 변경",
