@@ -6,9 +6,7 @@ const siteNav = document.getElementById('site-nav');
 
 // Page-specific elements (may not exist on all pages)
 const recommendBtn = document.getElementById('recommend-btn');
-const mealDisplay = document.getElementById('meal-display');
 const recommendedMealSpan = document.getElementById('recommended-meal');
-const mealImage = document.getElementById('meal-image');
 const historyList = document.getElementById('history-list');
 
 let dinnerMenus = [];
@@ -51,7 +49,6 @@ const applyTranslations = () => {
         }
     });
 
-    // Update page title based on page-specific title keys
     const pageTitleKey = document.querySelector('[data-page-title]');
     if (pageTitleKey) {
         const key = pageTitleKey.getAttribute('data-page-title');
@@ -77,7 +74,7 @@ const loadTranslations = async (lang) => {
 
 const updateLangButton = (lang) => {
     if (langToggleBtn) {
-        langToggleBtn.textContent = lang === 'ko' ? 'English' : '한국어';
+        langToggleBtn.textContent = lang === 'ko' ? 'EN' : 'KO';
     }
 };
 
@@ -96,7 +93,6 @@ if (langToggleBtn) {
     langToggleBtn.addEventListener('click', toggleLanguage);
 }
 
-// Apply saved theme on initial load
 const savedTheme = localStorage.getItem('theme') || 'light';
 applyTheme(savedTheme);
 
@@ -111,19 +107,19 @@ if (recommendBtn && recommendedMealSpan && historyList) {
         return dinnerMenus[randomIndex];
     };
 
-    const displayMeal = async (meal) => {
-        recommendedMealSpan.textContent = meal;
-        if (mealImage) {
-            try {
-                const response = await fetch(`https://source.unsplash.com/random/800x600/?${meal}`);
-                mealImage.src = response.url;
-                mealImage.alt = meal;
-                mealImage.style.display = 'block';
-            } catch (error) {
-                console.error('Error fetching image:', error);
-                mealImage.style.display = 'none';
-            }
-        }
+    const displayMeal = (meal) => {
+        // Slot machine animation
+        recommendedMealSpan.style.transition = 'none';
+        recommendedMealSpan.style.opacity = '0';
+        recommendedMealSpan.style.transform = 'translateY(-12px)';
+        requestAnimationFrame(() => {
+            recommendedMealSpan.textContent = meal;
+            requestAnimationFrame(() => {
+                recommendedMealSpan.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+                recommendedMealSpan.style.opacity = '1';
+                recommendedMealSpan.style.transform = 'translateY(0)';
+            });
+        });
     };
 
     const addToHistory = (meal) => {
@@ -132,22 +128,20 @@ if (recommendBtn && recommendedMealSpan && historyList) {
         historyList.prepend(listItem);
     };
 
-    const handleRecommendClick = async () => {
+    const handleRecommendClick = () => {
         const meal = recommendMeal();
-        await displayMeal(meal);
+        displayMeal(meal);
         addToHistory(meal);
     };
 
     recommendBtn.addEventListener('click', handleRecommendClick);
 
-    // Initial load with recommendation
     const savedLanguage = localStorage.getItem('language') || 'ko';
     updateLangButton(savedLanguage);
-    loadTranslations(savedLanguage).then(async () => {
-        await handleRecommendClick();
+    loadTranslations(savedLanguage).then(() => {
+        handleRecommendClick();
     });
 } else {
-    // Non-index pages: just load translations
     const savedLanguage = localStorage.getItem('language') || 'ko';
     updateLangButton(savedLanguage);
     loadTranslations(savedLanguage);
