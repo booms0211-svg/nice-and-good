@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공포탐욕지수 - 나스닥 & 크립토 투자 심리 지표</title>
-    <meta name="description" content="나스닥(CNN)과 크립토 시장의 공포탐욕지수를 실시간으로 확인하세요. 투자 심리를 0~100으로 수치화한 무료 대시보드.">
-    <meta property="og:title" content="공포탐욕지수 - 나스닥 & 크립토 투자 심리 지표">
-    <meta property="og:description" content="나스닥과 크립토 시장의 투자 심리를 실시간으로 확인하세요.">
+    <title>공포탐욕지수 - 나스닥 & 크립토 & VIX 투자 심리 지표</title>
+    <meta name="description" content="나스닥(CNN), 크립토, VIX 변동성지수를 실시간으로 확인하세요. 투자 심리를 0~100으로 수치화한 무료 대시보드.">
+    <meta property="og:title" content="공포탐욕지수 - 나스닥 & 크립토 & VIX 투자 심리 지표">
+    <meta property="og:description" content="나스닥, 크립토, VIX 시장의 투자 심리를 실시간으로 확인하세요.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://booms0211-svg.github.io/nice-and-good/">
     <link rel="canonical" href="https://booms0211-svg.github.io/nice-and-good/">
@@ -127,6 +127,35 @@
                             <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener noreferrer" class="cta-link" data-i18n="view_on_cnn">CNN에서 보기</a>
                         </div>
                     </div>
+
+                    <!-- VIX Volatility Index -->
+                    <div class="gauge-card" id="vix-card">
+                        <h2 class="gauge-title" data-i18n="vix_title">VIX 변동성지수</h2>
+                        <div class="gauge-wrap">
+                            <svg viewBox="0 0 200 120" class="gauge-svg" id="vix-gauge">
+                                <defs>
+                                    <linearGradient id="gaugeGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#16c784"/>
+                                        <stop offset="15%" stop-color="#6ec66a"/>
+                                        <stop offset="35%" stop-color="#f5c623"/>
+                                        <stop offset="60%" stop-color="#ea8c00"/>
+                                        <stop offset="100%" stop-color="#ea3943"/>
+                                    </linearGradient>
+                                </defs>
+                                <path class="gauge-bg" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke-width="18" stroke-linecap="round"/>
+                                <path class="gauge-fill" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="url(#gaugeGrad3)" stroke-width="18" stroke-linecap="round"/>
+                                <line class="gauge-needle" id="vix-needle" x1="100" y1="105" x2="25" y2="105" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle class="gauge-dot" cx="100" cy="105" r="4"/>
+                            </svg>
+                            <div class="gauge-score" id="vix-score" data-i18n="score_loading">로딩 중...</div>
+                            <div class="gauge-label" id="vix-label"></div>
+                        </div>
+                        <div class="gauge-updated" id="vix-updated"></div>
+                        <div class="trend-section">
+                            <h3 class="trend-title" data-i18n="trend_title">최근 7일 추이</h3>
+                            <div class="trend-bars" id="vix-trend"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -143,6 +172,10 @@
                     <div class="card">
                         <h3 data-i18n="what_stock_title">CNN 공포탐욕지수</h3>
                         <p data-i18n="what_stock_desc">CNN에서 제공하는 공포탐욕지수는 미국 주식시장(S&P 500, 나스닥 등)의 투자 심리를 측정합니다.</p>
+                    </div>
+                    <div class="card">
+                        <h3 data-i18n="what_vix_title">VIX 변동성지수</h3>
+                        <p data-i18n="what_vix_desc">CBOE에서 산출하는 VIX는 S&P 500 옵션 가격에서 향후 30일간의 시장 변동성 기대치를 측정합니다.</p>
                     </div>
                 </div>
             </div>

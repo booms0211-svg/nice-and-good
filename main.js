@@ -92,9 +92,27 @@ if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', toggleTheme);
 }
 
+// ===== Guide Page Tab System =====
+const tabBtns = document.querySelectorAll('.guide-tab-btn');
+if (tabBtns.length > 0) {
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const targetTab = btn.getAttribute('data-tab');
+            tabBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.guide-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            const target = document.getElementById(targetTab);
+            if (target) target.classList.add('active');
+        });
+    });
+}
+
 // ===== Fear & Greed Index (only on index page) =====
 const cryptoNeedle = document.getElementById('crypto-needle');
 const stockNeedle = document.getElementById('stock-needle');
+const vixNeedle = document.getElementById('vix-needle');
 
 if (cryptoNeedle) {
     const CRYPTO_API = 'https://api.alternative.me/fng/?limit=30&date_format=world';
@@ -102,7 +120,43 @@ if (cryptoNeedle) {
         'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata'),
         'https://corsproxy.io/?' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata')
     ];
+    const VIX_PROXY_URLS = [
+        'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d'),
+        'https://corsproxy.io/?' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d')
+    ];
 
+    // ===== US Market Hours Detection =====
+    function isUSMarketHours() {
+        const now = new Date();
+        const estOffset = -5;
+        const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+        const est = new Date(utc + 3600000 * estOffset);
+        const day = est.getDay();
+        const hours = est.getHours();
+        const minutes = est.getMinutes();
+        const timeInMinutes = hours * 60 + minutes;
+        // Monday-Friday, 09:30-16:00 EST
+        return day >= 1 && day <= 5 && timeInMinutes >= 570 && timeInMinutes <= 960;
+    }
+
+    // ===== Timestamp Formatting =====
+    function formatTimestamp() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    }
+
+    function updateTimestamp(elementId) {
+        const el = document.getElementById(elementId);
+        if (el) {
+            const prefix = translations.last_updated_at || '마지막 업데이트: ';
+            el.textContent = prefix + formatTimestamp();
+        }
+    }
+
+    // ===== Status Info =====
     function getStatusInfo(score) {
         if (score <= 24) return { key: 'status_extreme_fear', color: '#ea3943', fallback: '극도의 공포' };
         if (score <= 44) return { key: 'status_fear', color: '#ea8c00', fallback: '공포' };
@@ -111,6 +165,15 @@ if (cryptoNeedle) {
         return { key: 'status_extreme_greed', color: '#16c784', fallback: '극도의 탐욕' };
     }
 
+    function getVixStatusInfo(vixValue) {
+        if (vixValue >= 40) return { key: 'vix_status_extreme_fear', color: '#ea3943', fallback: '극도의 공포' };
+        if (vixValue >= 30) return { key: 'vix_status_fear', color: '#ea8c00', fallback: '공포' };
+        if (vixValue >= 20) return { key: 'vix_status_caution', color: '#f5c623', fallback: '주의' };
+        if (vixValue >= 15) return { key: 'vix_status_stable', color: '#6ec66a', fallback: '안정' };
+        return { key: 'vix_status_very_stable', color: '#16c784', fallback: '매우 안정' };
+    }
+
+    // ===== Gauge Updates =====
     function updateGauge(prefix, score) {
         const needle = document.getElementById(`${prefix}-needle`);
         const scoreEl = document.getElementById(`${prefix}-score`);
@@ -131,6 +194,30 @@ if (cryptoNeedle) {
         scoreEl.style.color = status.color;
     }
 
+    function updateVixGauge(vixValue) {
+        const needle = document.getElementById('vix-needle');
+        const scoreEl = document.getElementById('vix-score');
+        const labelEl = document.getElementById('vix-label');
+
+        if (!needle || !scoreEl || !labelEl) return;
+
+        // VIX range: 10-80, normalize to 0-1 then to 0-180 degrees
+        const clamped = Math.max(10, Math.min(80, vixValue));
+        const normalized = (clamped - 10) / 70;
+        const rotation = normalized * 180;
+
+        needle.style.transition = 'transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        needle.setAttribute('transform', `rotate(${rotation}, 100, 105)`);
+
+        scoreEl.textContent = vixValue.toFixed(1);
+        scoreEl.className = 'gauge-score';
+
+        const status = getVixStatusInfo(vixValue);
+        labelEl.textContent = translations[status.key] || status.fallback;
+        labelEl.style.color = status.color;
+        scoreEl.style.color = status.color;
+    }
+
     function showGaugeError(prefix) {
         const scoreEl = document.getElementById(`${prefix}-score`);
         const labelEl = document.getElementById(`${prefix}-label`);
@@ -142,6 +229,7 @@ if (cryptoNeedle) {
         if (labelEl) labelEl.textContent = '';
     }
 
+    // ===== Trend Bars =====
     function renderTrendBars(containerId, data) {
         const container = document.getElementById(containerId);
         if (!container || !data || data.length === 0) return;
@@ -177,11 +265,50 @@ if (cryptoNeedle) {
         });
     }
 
+    function renderVixTrendBars(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container || !data || data.length === 0) return;
+
+        const items = data.slice(0, 7).reverse();
+        container.innerHTML = '';
+
+        items.forEach(item => {
+            const val = parseFloat(item.value);
+            const status = getVixStatusInfo(val);
+            const date = item.dateLabel || '';
+
+            // Normalize VIX (10-80) to percentage for bar height (max 100%)
+            const pct = Math.min(100, Math.max(5, ((val - 10) / 70) * 100));
+
+            const bar = document.createElement('div');
+            bar.className = 'trend-bar';
+
+            const fill = document.createElement('div');
+            fill.className = 'trend-bar-fill';
+            fill.style.height = `${pct}%`;
+            fill.style.backgroundColor = status.color;
+
+            const valueLabel = document.createElement('span');
+            valueLabel.className = 'trend-value';
+            valueLabel.textContent = val.toFixed(1);
+
+            const dateLabel = document.createElement('span');
+            dateLabel.className = 'trend-date';
+            dateLabel.textContent = date;
+
+            bar.appendChild(valueLabel);
+            bar.appendChild(fill);
+            bar.appendChild(dateLabel);
+            container.appendChild(bar);
+        });
+    }
+
     function formatDate(timestamp) {
         const d = new Date(parseInt(timestamp) * 1000);
         return `${d.getMonth() + 1}/${d.getDate()}`;
     }
 
+    // ===== Fetch Functions =====
     async function fetchCryptoFGI() {
         try {
             const res = await fetch(CRYPTO_API);
@@ -190,12 +317,7 @@ if (cryptoNeedle) {
             const score = parseInt(current.value);
 
             updateGauge('crypto', score);
-
-            const updatedEl = document.getElementById('crypto-updated');
-            if (updatedEl) {
-                const prefix = translations.updated_prefix || '업데이트: ';
-                updatedEl.textContent = prefix + formatDate(current.timestamp);
-            }
+            updateTimestamp('crypto-updated');
 
             const trendData = json.data.slice(0, 7).map(d => ({
                 value: d.value,
@@ -227,12 +349,7 @@ if (cryptoNeedle) {
         if (data && data.fear_and_greed) {
             const score = Math.round(data.fear_and_greed.score);
             updateGauge('stock', score);
-
-            const updatedEl = document.getElementById('stock-updated');
-            if (updatedEl) {
-                const prefix = translations.updated_prefix || '업데이트: ';
-                updatedEl.textContent = prefix + (translations.updated_just_now || '방금 전');
-            }
+            updateTimestamp('stock-updated');
 
             // Parse historical data for trend
             if (data.fear_and_greed_historical && data.fear_and_greed_historical.data) {
@@ -255,19 +372,110 @@ if (cryptoNeedle) {
         }
     }
 
-    async function fetchAllData() {
-        await Promise.allSettled([fetchCryptoFGI(), fetchCNNFGI()]);
+    async function fetchVIX() {
+        let data = null;
+
+        for (const url of VIX_PROXY_URLS) {
+            try {
+                const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+                if (res.ok) {
+                    data = await res.json();
+                    break;
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+
+        if (data && data.chart && data.chart.result && data.chart.result[0]) {
+            const result = data.chart.result[0];
+            const closes = result.indicators.quote[0].close;
+            const timestamps = result.timestamp;
+
+            // Get the latest valid close value
+            let latestVix = null;
+            for (let i = closes.length - 1; i >= 0; i--) {
+                if (closes[i] !== null) {
+                    latestVix = closes[i];
+                    break;
+                }
+            }
+
+            if (latestVix !== null) {
+                updateVixGauge(latestVix);
+                updateTimestamp('vix-updated');
+
+                // Build trend data from daily closes
+                const trendData = [];
+                for (let i = 0; i < timestamps.length; i++) {
+                    if (closes[i] !== null) {
+                        const d = new Date(timestamps[i] * 1000);
+                        trendData.push({
+                            value: closes[i].toFixed(1),
+                            dateLabel: `${d.getMonth() + 1}/${d.getDate()}`
+                        });
+                    }
+                }
+                renderVixTrendBars('vix-trend', trendData.slice(-7).reverse());
+            } else {
+                showGaugeError('vix');
+            }
+        } else {
+            showGaugeError('vix');
+        }
     }
+
+    async function fetchAllData() {
+        await Promise.allSettled([fetchCryptoFGI(), fetchCNNFGI(), fetchVIX()]);
+    }
+
+    // ===== Differential Refresh =====
+    let cryptoTimer = null;
+    let cnnTimer = null;
+    let vixTimer = null;
+
+    function startDifferentialRefresh() {
+        // Clear existing timers
+        if (cryptoTimer) clearInterval(cryptoTimer);
+        if (cnnTimer) clearInterval(cnnTimer);
+        if (vixTimer) clearInterval(vixTimer);
+
+        const marketOpen = isUSMarketHours();
+
+        // Crypto: always 30 min (daily update)
+        cryptoTimer = setInterval(fetchCryptoFGI, 30 * 60 * 1000);
+
+        // CNN: 1 min during market hours, 10 min otherwise
+        const cnnInterval = marketOpen ? 1 * 60 * 1000 : 10 * 60 * 1000;
+        cnnTimer = setInterval(fetchCNNFGI, cnnInterval);
+
+        // VIX: 3 min during market hours, 30 min otherwise
+        const vixInterval = marketOpen ? 3 * 60 * 1000 : 30 * 60 * 1000;
+        vixTimer = setInterval(fetchVIX, vixInterval);
+
+        // Update auto-refresh label
+        const refreshLabel = document.querySelector('.auto-refresh-label');
+        if (refreshLabel) {
+            if (marketOpen) {
+                refreshLabel.textContent = translations.auto_refresh_market || '장중: CNN 1분 / VIX 3분 / 크립토 30분 간격 갱신';
+            } else {
+                refreshLabel.textContent = translations.auto_refresh_closed || '장외: CNN 10분 / VIX 30분 / 크립토 30분 간격 갱신';
+            }
+        }
+    }
+
+    // Re-check market hours every 5 minutes to switch intervals
+    setInterval(() => {
+        startDifferentialRefresh();
+    }, 5 * 60 * 1000);
 
     // Init
     const savedLanguage = localStorage.getItem('language') || 'ko';
     updateLangButton(savedLanguage);
     loadTranslations(savedLanguage).then(() => {
         fetchAllData();
+        startDifferentialRefresh();
     });
-
-    // Auto-refresh every 5 minutes
-    setInterval(fetchAllData, 5 * 60 * 1000);
 
 } else {
     // Non-dashboard pages

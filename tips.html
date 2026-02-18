@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>투자 가이드 - 공포탐욕지수</title>
-    <meta name="description" content="공포탐욕지수를 활용한 투자 전략과 시장 심리 분석 방법. 역발상 투자, 분할매수, VIX 분석 등 5가지 핵심 가이드.">
+    <meta name="description" content="공포탐욕지수를 활용한 투자 전략과 시장 심리 분석 방법. 크립토, CNN, VIX 지수별 5단계 상세 가이드.">
     <meta property="og:title" content="투자 가이드 - 공포탐욕지수">
     <meta property="og:description" content="공포탐욕지수를 활용한 투자 전략과 시장 심리 분석 방법을 알아보세요.">
     <meta property="og:type" content="article">
@@ -46,22 +46,264 @@
 
         <article class="content-section">
             <div class="container">
-                <div class="tip-card">
-                    <h2 data-i18n="guide_1_title">1. 역발상 투자 전략</h2>
-                    <p data-i18n="guide_1_desc">워렌 버핏은 "남들이 공포에 떨 때 탐욕을 부리고, 남들이 탐욕을 부릴 때 공포를 가져라"고 말했습니다.</p>
-                    <p class="tip-detail" data-i18n="guide_1_detail">실전 팁: 지수가 20 이하로 떨어지면 분할매수를, 80 이상으로 올라가면 일부 차익실현을 고려해보세요.</p>
+                <!-- Tab Navigation -->
+                <div class="guide-tabs">
+                    <button class="guide-tab-btn active" data-tab="tab-basic" data-i18n="tab_basic">기본 전략</button>
+                    <button class="guide-tab-btn" data-tab="tab-crypto" data-i18n="tab_crypto">크립토 가이드</button>
+                    <button class="guide-tab-btn" data-tab="tab-cnn" data-i18n="tab_cnn">CNN 가이드</button>
+                    <button class="guide-tab-btn" data-tab="tab-vix" data-i18n="tab_vix">VIX 가이드</button>
                 </div>
 
-                <div class="tip-card">
-                    <h2 data-i18n="guide_2_title">2. 크립토 vs 주식 시장 비교</h2>
-                    <p data-i18n="guide_2_desc">크립토 시장과 전통 주식 시장의 공포탐욕지수는 종종 다른 방향으로 움직입니다.</p>
-                    <p class="tip-detail" data-i18n="guide_2_detail">관찰 포인트: 크립토가 극도의 탐욕이고 주식이 공포라면, 위험자산 선호 심리가 크립토에 집중되고 있다는 신호입니다.</p>
+                <!-- Tab 1: Basic Strategy -->
+                <div class="guide-tab-content active" id="tab-basic">
+                    <div class="tip-card">
+                        <h2 data-i18n="guide_1_title">1. 역발상 투자 전략</h2>
+                        <p data-i18n="guide_1_desc">워렌 버핏은 "남들이 공포에 떨 때 탐욕을 부리고, 남들이 탐욕을 부릴 때 공포를 가져라"고 말했습니다.</p>
+                        <p class="tip-detail" data-i18n="guide_1_detail">실전 팁: 지수가 20 이하로 떨어지면 분할매수를, 80 이상으로 올라가면 일부 차익실현을 고려해보세요.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h2 data-i18n="guide_2_title">2. 세 시장 동시 비교</h2>
+                        <p data-i18n="guide_2_desc">크립토, CNN 공포탐욕지수, VIX 변동성지수를 함께 비교하면 시장 간 심리 차이와 자금 흐름을 파악할 수 있습니다.</p>
+                        <p class="tip-detail" data-i18n="guide_2_detail">관찰 포인트: 크립토가 극도의 탐욕이고 주식이 공포라면, 위험자산 선호 심리가 크립토에 집중되고 있다는 신호입니다.</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h2 data-i18n="guide_3_title">3. 분할매수 전략과 공포탐욕지수</h2>
+                        <p data-i18n="guide_3_desc">공포탐욕지수를 활용한 분할매수 전략은 감정적 투자를 줄이는 데 효과적입니다.</p>
+                        <p class="tip-detail" data-i18n="guide_3_levels">극도의 공포 (0~24): 적극 매수 | 공포 (25~44): 매수 비중 확대 | 중립 (45~55): 기본 매수 유지 | 탐욕 (56~74): 매수 비중 축소 | 극도의 탐욕 (75~100): 매수 중단 또는 차익실현</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h2 data-i18n="guide_4_title">4. VIX와 함께 보는 시장 분석</h2>
+                        <p data-i18n="guide_4_desc">CNN 공포탐욕지수의 핵심 구성 요소 중 하나인 VIX(변동성지수)는 시장의 불확실성을 측정합니다.</p>
+                        <p class="tip-detail" data-i18n="guide_4_detail">VIX 20~30: 주의 구간 | VIX 30 이상: 공포 구간 | VIX 15 이하: 안정 구간</p>
+                    </div>
+
+                    <div class="tip-card">
+                        <h2 data-i18n="guide_5_title">5. 공포탐욕지수의 한계와 주의사항</h2>
+                        <p data-i18n="guide_5_desc">공포탐욕지수는 유용한 보조 지표이지만, 이것만으로 투자 결정을 내리면 안 됩니다.</p>
+                        <p class="tip-detail" data-i18n="guide_5_detail">항상 기억하세요: 투자의 최종 결정과 책임은 본인에게 있습니다.</p>
+                    </div>
                 </div>
 
-                <div class="tip-card">
-                    <h2 data-i18n="guide_3_title">3. 분할매수 전략과 공포탐욕지수</h2>
-                    <p data-i18n="guide_3_desc">공포탐욕지수를 활용한 분할매수 전략은 감정적 투자를 줄이는 데 효과적입니다.</p>
-                    <p class="tip-detail" data-i18n="guide_3_levels">극도의 공포 (0~24): 적극 매수 | 공포 (25~44): 매수 비중 확대 | 중립 (45~55): 기본 매수 유지 | 탐욕 (56~74): 매수 비중 축소 | 극도의 탐욕 (75~100): 매수 중단 또는 차익실현</p>
+                <!-- Tab 2: Crypto Guide (5 levels) -->
+                <div class="guide-tab-content" id="tab-crypto">
+                    <div class="guide-level-card level-extreme-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="crypto_level1_badge">0-24</span>
+                            <h3 data-i18n="crypto_level1_title">극도의 공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="crypto_level1_situation">시장 전체가 패닉 상태입니다. 대규모 매도세와 FUD(공포, 불확실성, 의심)가 지배합니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="crypto_level1_action1">비트코인, 이더리움 등 대형 코인 분할매수 시작</li>
+                            <li data-i18n="crypto_level1_action2">전체 투자금의 30~40%까지 단계적 진입</li>
+                            <li data-i18n="crypto_level1_action3">레버리지 사용 자제, 현물 중심 매수</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="crypto_level1_example">역사적 사례: 2022년 6월 FTX 사태 당시 지수 6까지 하락 후 반등</p>
+                    </div>
+
+                    <div class="guide-level-card level-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="crypto_level2_badge">25-44</span>
+                            <h3 data-i18n="crypto_level2_title">공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="crypto_level2_situation">시장에 불안감이 확산되어 있지만, 극단적 패닉은 아닌 상태입니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="crypto_level2_action1">관심 코인의 기술적 지지선 확인 후 매수</li>
+                            <li data-i18n="crypto_level2_action2">DCA(정기적 분할매수) 비중 확대</li>
+                            <li data-i18n="crypto_level2_action3">포트폴리오 리밸런싱 검토</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="crypto_level2_example">역사적 사례: 약세장에서 지수 30~40 구간은 중기 저점 형성 구간</p>
+                    </div>
+
+                    <div class="guide-level-card level-neutral">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="crypto_level3_badge">45-55</span>
+                            <h3 data-i18n="crypto_level3_title">중립</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="crypto_level3_situation">시장 방향성이 불명확한 관망 구간입니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="crypto_level3_action1">기존 DCA 계획 유지</li>
+                            <li data-i18n="crypto_level3_action2">신규 대규모 진입은 자제</li>
+                            <li data-i18n="crypto_level3_action3">온체인 데이터, 거래량 등 다른 지표 모니터링</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="crypto_level3_example">참고: 중립 구간은 보통 큰 움직임 전 축적 기간</p>
+                    </div>
+
+                    <div class="guide-level-card level-greed">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="crypto_level4_badge">56-74</span>
+                            <h3 data-i18n="crypto_level4_title">탐욕</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="crypto_level4_situation">시장 참여자들의 낙관론이 확산되고 있습니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="crypto_level4_action1">신규 매수 비중 축소</li>
+                            <li data-i18n="crypto_level4_action2">일부 수익 실현 시작 (10~20%)</li>
+                            <li data-i18n="crypto_level4_action3">손절매 라인 설정 및 리스크 관리 강화</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="crypto_level4_example">역사적 사례: 강세장 중간 조정은 탐욕 구간에서 자주 발생</p>
+                    </div>
+
+                    <div class="guide-level-card level-extreme-greed">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="crypto_level5_badge">75-100</span>
+                            <h3 data-i18n="crypto_level5_title">극도의 탐욕</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="crypto_level5_situation">시장이 과열 상태이며, FOMO(놓칠까 봐 두려운 심리)가 만연합니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="crypto_level5_action1">추가 매수 중단</li>
+                            <li data-i18n="crypto_level5_action2">보유 자산의 20~30% 단계적 차익 실현</li>
+                            <li data-i18n="crypto_level5_action3">스테이블코인 비중 확대로 리스크 헤지</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="crypto_level5_example">역사적 사례: 2021년 11월 비트코인 ATH 당시 지수 84 기록 후 장기 하락</p>
+                    </div>
+                </div>
+
+                <!-- Tab 3: CNN Guide (5 levels) -->
+                <div class="guide-tab-content" id="tab-cnn">
+                    <div class="guide-level-card level-extreme-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="cnn_level1_badge">0-24</span>
+                            <h3 data-i18n="cnn_level1_title">극도의 공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="cnn_level1_situation">주식시장이 극도의 불안 상태입니다. 풋옵션 비율이 급증하고 안전자산으로 자금이 이동합니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="cnn_level1_action1">S&P 500, 나스닥 ETF 분할매수 검토</li>
+                            <li data-i18n="cnn_level1_action2">우량 배당주 선별 매수</li>
+                            <li data-i18n="cnn_level1_action3">현금 비중 50% 이상 유지하며 단계적 진입</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="cnn_level1_example">역사적 사례: 2020년 3월 코로나 폭락 당시 지수 2까지 하락 후 V자 반등</p>
+                    </div>
+
+                    <div class="guide-level-card level-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="cnn_level2_badge">25-44</span>
+                            <h3 data-i18n="cnn_level2_title">공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="cnn_level2_situation">시장에 비관론이 우세하지만, 패닉 수준은 아닙니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="cnn_level2_action1">가치주 중심 선별 매수</li>
+                            <li data-i18n="cnn_level2_action2">섹터 ETF로 분산투자 확대</li>
+                            <li data-i18n="cnn_level2_action3">기업 실적 발표 주기와 연계하여 진입 시점 결정</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="cnn_level2_example">역사적 사례: 금리 인상기 공포 구간에서의 가치주 아웃퍼포먼스</p>
+                    </div>
+
+                    <div class="guide-level-card level-neutral">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="cnn_level3_badge">45-55</span>
+                            <h3 data-i18n="cnn_level3_title">중립</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="cnn_level3_situation">매수와 매도 세력이 균형을 이루고 있습니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="cnn_level3_action1">기존 포트폴리오 유지</li>
+                            <li data-i18n="cnn_level3_action2">매크로 경제 지표(CPI, 고용, 금리) 모니터링</li>
+                            <li data-i18n="cnn_level3_action3">방향성 확인 후 비중 조절</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="cnn_level3_example">참고: 중립 구간에서는 개별 종목의 펀더멘탈이 더 중요</p>
+                    </div>
+
+                    <div class="guide-level-card level-greed">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="cnn_level4_badge">56-74</span>
+                            <h3 data-i18n="cnn_level4_title">탐욕</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="cnn_level4_situation">시장 낙관론이 확대되고 콜옵션 비율이 증가합니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="cnn_level4_action1">신규 매수 비중 축소</li>
+                            <li data-i18n="cnn_level4_action2">고평가 성장주 일부 차익 실현</li>
+                            <li data-i18n="cnn_level4_action3">방어적 섹터(유틸리티, 헬스케어) 비중 확대 검토</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="cnn_level4_example">역사적 사례: 탐욕 구간이 장기간 지속되면 조정 확률 상승</p>
+                    </div>
+
+                    <div class="guide-level-card level-extreme-greed">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="cnn_level5_badge">75-100</span>
+                            <h3 data-i18n="cnn_level5_title">극도의 탐욕</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="cnn_level5_situation">시장 과열 상태이며, 거품 징후가 나타날 수 있습니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="cnn_level5_action1">추가 매수 중단 및 현금 비중 확대</li>
+                            <li data-i18n="cnn_level5_action2">보유 주식의 20~30% 단계적 매도</li>
+                            <li data-i18n="cnn_level5_action3">풋옵션 또는 인버스 ETF로 헤지 검토</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="cnn_level5_example">역사적 사례: 2021년 말 S&P 500 ATH 당시 극도의 탐욕 후 2022년 약세장 시작</p>
+                    </div>
+                </div>
+
+                <!-- Tab 4: VIX Guide (5 levels) -->
+                <div class="guide-tab-content" id="tab-vix">
+                    <div class="guide-level-card level-very-stable">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="vix_level1_badge">10-15</span>
+                            <h3 data-i18n="vix_level1_title">매우 안정</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="vix_level1_situation">시장 변동성이 극히 낮은 안정 상태입니다. 투자자 불안감이 최소입니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="vix_level1_action1">기존 포지션 유지, 안정적 수익 추구</li>
+                            <li data-i18n="vix_level1_action2">변동성 매수(Long Volatility) 전략 검토</li>
+                            <li data-i18n="vix_level1_action3">과도한 안정은 폭풍 전 고요일 수 있음에 주의</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="vix_level1_example">역사적 사례: 2017년 VIX 9~10 유지 후 2018년 2월 '볼마게돈' 발생</p>
+                    </div>
+
+                    <div class="guide-level-card level-stable">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="vix_level2_badge">15-20</span>
+                            <h3 data-i18n="vix_level2_title">안정</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="vix_level2_situation">정상적인 시장 변동성 범위입니다. 건전한 시장 상태를 나타냅니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="vix_level2_action1">일반적인 투자 전략 유지</li>
+                            <li data-i18n="vix_level2_action2">펀더멘탈 중심의 종목 선별</li>
+                            <li data-i18n="vix_level2_action3">리스크 관리 기본 원칙 준수</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="vix_level2_example">참고: VIX 장기 평균은 약 19~20 수준</p>
+                    </div>
+
+                    <div class="guide-level-card level-caution">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="vix_level3_badge">20-30</span>
+                            <h3 data-i18n="vix_level3_title">주의</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="vix_level3_situation">시장 불확실성이 증가하고 있습니다. 경제 이벤트나 지정학적 리스크가 반영됩니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="vix_level3_action1">포트폴리오 방어적 리밸런싱</li>
+                            <li data-i18n="vix_level3_action2">현금 비중 확대 (20~30%)</li>
+                            <li data-i18n="vix_level3_action3">손절매 라인 설정 및 리스크 관리 강화</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="vix_level3_example">역사적 사례: 연준 금리 결정 전후 VIX 20~25 구간 빈번</p>
+                    </div>
+
+                    <div class="guide-level-card level-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="vix_level4_badge">30-40</span>
+                            <h3 data-i18n="vix_level4_title">공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="vix_level4_situation">시장에 심각한 불안감이 확산되어 있습니다. 급격한 가격 변동이 예상됩니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="vix_level4_action1">방어적 자산(국채, 금) 비중 확대</li>
+                            <li data-i18n="vix_level4_action2">우량주 선별적 분할매수 시작</li>
+                            <li data-i18n="vix_level4_action3">레버리지 상품 사용 금지</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="vix_level4_example">역사적 사례: 2022년 러시아-우크라이나 전쟁 시 VIX 36 기록</p>
+                    </div>
+
+                    <div class="guide-level-card level-extreme-fear">
+                        <div class="guide-level-header">
+                            <span class="guide-level-badge" data-i18n="vix_level5_badge">40+</span>
+                            <h3 data-i18n="vix_level5_title">극도의 공포</h3>
+                        </div>
+                        <p class="guide-level-situation" data-i18n="vix_level5_situation">시장 패닉 상태입니다. 역사적으로 극히 드문 수준의 변동성입니다.</p>
+                        <ul class="guide-level-actions">
+                            <li data-i18n="vix_level5_action1">현금 확보 최우선, 기존 포지션 유지</li>
+                            <li data-i18n="vix_level5_action2">장기 관점으로 S&P 500 ETF 소량 매수</li>
+                            <li data-i18n="vix_level5_action3">단기 트레이딩 금지, 감정적 판단 자제</li>
+                        </ul>
+                        <p class="guide-level-example" data-i18n="vix_level5_example">역사적 사례: 2020년 3월 코로나 당시 VIX 82 기록, 이후 역사적 반등</p>
+                    </div>
                 </div>
             </div>
         </article>
@@ -75,22 +317,6 @@
                  data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-
-        <article class="content-section">
-            <div class="container">
-                <div class="tip-card">
-                    <h2 data-i18n="guide_4_title">4. VIX와 함께 보는 시장 분석</h2>
-                    <p data-i18n="guide_4_desc">CNN 공포탐욕지수의 핵심 구성 요소 중 하나인 VIX(변동성지수)는 시장의 불확실성을 측정합니다.</p>
-                    <p class="tip-detail" data-i18n="guide_4_detail">VIX 20~30: 주의 구간 | VIX 30 이상: 공포 구간 | VIX 15 이하: 안정 구간</p>
-                </div>
-
-                <div class="tip-card">
-                    <h2 data-i18n="guide_5_title">5. 공포탐욕지수의 한계와 주의사항</h2>
-                    <p data-i18n="guide_5_desc">공포탐욕지수는 유용한 보조 지표이지만, 이것만으로 투자 결정을 내리면 안 됩니다.</p>
-                    <p class="tip-detail" data-i18n="guide_5_detail">항상 기억하세요: 투자의 최종 결정과 책임은 본인에게 있습니다.</p>
-                </div>
-            </div>
-        </article>
 
         <section class="disclaimer-section" style="padding: 24px 0;">
             <div class="container">
