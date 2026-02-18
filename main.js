@@ -116,14 +116,34 @@ const vixNeedle = document.getElementById('vix-needle');
 
 if (cryptoNeedle) {
     const CRYPTO_API = 'https://api.alternative.me/fng/?limit=30&date_format=world';
-    const CNN_PROXY_URLS = [
-        'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata'),
-        'https://corsproxy.io/?' + encodeURIComponent('https://production.dataviz.cnn.io/index/fearandgreed/graphdata')
-    ];
-    const VIX_PROXY_URLS = [
-        'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d'),
-        'https://corsproxy.io/?' + encodeURIComponent('https://query1.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d')
-    ];
+    const CNN_TARGET = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';
+    const VIX_TARGET = 'https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d';
+
+    // Proxy fetch with multiple fallbacks + allorigins JSON wrapper
+    async function proxyFetch(targetUrl, timeout = 8000) {
+        const proxies = [
+            { url: 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), type: 'raw' },
+            { url: 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), type: 'raw' },
+            { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl), type: 'allorigins' },
+        ];
+        for (const proxy of proxies) {
+            try {
+                const res = await fetch(proxy.url, { signal: AbortSignal.timeout(timeout) });
+                if (!res.ok) continue;
+                if (proxy.type === 'allorigins') {
+                    const wrapper = await res.json();
+                    if (wrapper && wrapper.contents) {
+                        return JSON.parse(wrapper.contents);
+                    }
+                    continue;
+                }
+                return await res.json();
+            } catch (e) {
+                continue;
+            }
+        }
+        return null;
+    }
 
     // ===== US Market Hours Detection =====
     function isUSMarketHours() {
@@ -332,19 +352,7 @@ if (cryptoNeedle) {
     }
 
     async function fetchCNNFGI() {
-        let data = null;
-
-        for (const url of CNN_PROXY_URLS) {
-            try {
-                const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-                if (res.ok) {
-                    data = await res.json();
-                    break;
-                }
-            } catch (e) {
-                continue;
-            }
-        }
+        const data = await proxyFetch(CNN_TARGET);
 
         if (data && data.fear_and_greed) {
             const score = Math.round(data.fear_and_greed.score);
@@ -373,19 +381,7 @@ if (cryptoNeedle) {
     }
 
     async function fetchVIX() {
-        let data = null;
-
-        for (const url of VIX_PROXY_URLS) {
-            try {
-                const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-                if (res.ok) {
-                    data = await res.json();
-                    break;
-                }
-            } catch (e) {
-                continue;
-            }
-        }
+        const data = await proxyFetch(VIX_TARGET);
 
         if (data && data.chart && data.chart.result && data.chart.result[0]) {
             const result = data.chart.result[0];
