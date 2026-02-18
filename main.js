@@ -116,27 +116,16 @@ const vixNeedle = document.getElementById('vix-needle');
 
 if (cryptoNeedle) {
     const CRYPTO_API = 'https://api.alternative.me/fng/?limit=30&date_format=world';
-    // ===== CORS Proxy (Cloudflare Worker) =====
-    // IMPORTANT: Replace this URL with your deployed Cloudflare Worker URL
-    const WORKER_BASE = 'https://fear-greed-proxy.booms0211.workers.dev';
-
     const CNN_TARGET = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';
     const VIX_TARGET = 'https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d';
 
     async function proxyFetch(targetUrl, timeout = 8000) {
-        // 1st: Try own Cloudflare Worker
-        try {
-            const workerUrl = WORKER_BASE + '?url=' + encodeURIComponent(targetUrl);
-            const res = await fetch(workerUrl, { signal: AbortSignal.timeout(timeout) });
-            if (res.ok) return await res.json();
-        } catch (e) { /* fallback */ }
-
-        // 2nd/3rd: Free proxy fallbacks
-        const fallbacks = [
+        const proxies = [
+            { url: 'https://corsproxy.io/?' + encodeURIComponent(targetUrl), type: 'raw' },
             { url: 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl), type: 'allorigins' },
             { url: 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl), type: 'raw' },
         ];
-        for (const proxy of fallbacks) {
+        for (const proxy of proxies) {
             try {
                 const res = await fetch(proxy.url, { signal: AbortSignal.timeout(timeout) });
                 if (!res.ok) continue;
@@ -145,7 +134,8 @@ if (cryptoNeedle) {
                     if (wrapper && wrapper.contents) return JSON.parse(wrapper.contents);
                     continue;
                 }
-                return await res.json();
+                const text = await res.text();
+                try { return JSON.parse(text); } catch (e) { continue; }
             } catch (e) { continue; }
         }
         return null;
