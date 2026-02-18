@@ -117,7 +117,7 @@ const vixNeedle = document.getElementById('vix-needle');
 if (cryptoNeedle) {
     const CRYPTO_API = 'https://api.alternative.me/fng/?limit=30&date_format=world';
     const CNN_TARGET = 'https://production.dataviz.cnn.io/index/fearandgreed/graphdata';
-    const VIX_TARGET = 'https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX?range=7d&interval=1d';
+    const VIX_TARGET = 'https://query2.finance.yahoo.com/v8/finance/chart/%5EVIX?range=1mo&interval=1d';
 
     async function proxyFetch(targetUrl, timeout = 8000) {
         const proxies = [
@@ -324,6 +324,105 @@ if (cryptoNeedle) {
         return `${d.getMonth() + 1}/${d.getDate()}`;
     }
 
+    // ===== Line Charts (Chart.js) =====
+    const chartInstances = {};
+
+    function getChartColors() {
+        const isDark = document.body.classList.contains('dark-theme');
+        return {
+            gridColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+            textColor: isDark ? '#868e96' : '#8b95a1',
+        };
+    }
+
+    function createGradientFill(ctx, colorStops) {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+        colorStops.forEach(([offset, color]) => gradient.addColorStop(offset, color));
+        return gradient;
+    }
+
+    function renderLineChart(canvasId, labels, data, { color, fillStops, yMin, yMax, isVix }) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas || typeof Chart === 'undefined') return;
+
+        if (chartInstances[canvasId]) {
+            chartInstances[canvasId].destroy();
+        }
+
+        const ctx = canvas.getContext('2d');
+        const colors = getChartColors();
+        const fill = createGradientFill(ctx, fillStops);
+
+        // Segment coloring for FGI charts (0-100)
+        let segmentColor;
+        if (!isVix) {
+            segmentColor = (ctx) => {
+                const v = ctx.p1.parsed.y;
+                if (v <= 24) return '#ea3943';
+                if (v <= 44) return '#ea8c00';
+                if (v <= 55) return '#f5c623';
+                if (v <= 74) return '#6ec66a';
+                return '#16c784';
+            };
+        } else {
+            segmentColor = (ctx) => {
+                const v = ctx.p1.parsed.y;
+                if (v >= 40) return '#ea3943';
+                if (v >= 30) return '#ea8c00';
+                if (v >= 20) return '#f5c623';
+                if (v >= 15) return '#6ec66a';
+                return '#16c784';
+            };
+        }
+
+        chartInstances[canvasId] = new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [{
+                    data,
+                    borderWidth: 2.5,
+                    pointRadius: 3,
+                    pointHoverRadius: 5,
+                    pointBackgroundColor: color,
+                    pointBorderColor: color,
+                    fill: true,
+                    backgroundColor: fill,
+                    tension: 0.3,
+                    segment: { borderColor: segmentColor },
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleFont: { size: 12 },
+                        bodyFont: { size: 13, weight: 'bold' },
+                        padding: 10,
+                        cornerRadius: 8,
+                        displayColors: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: colors.textColor, font: { size: 10 }, maxRotation: 0 },
+                    },
+                    y: {
+                        min: yMin,
+                        max: yMax,
+                        grid: { color: colors.gridColor },
+                        ticks: { color: colors.textColor, font: { size: 10 }, stepSize: isVix ? 10 : 20 },
+                    }
+                },
+                interaction: { intersect: false, mode: 'index' },
+            }
+        });
+    }
+
     // ===== Fetch Functions =====
     async function fetchCryptoFGI() {
         try {
@@ -340,6 +439,18 @@ if (cryptoNeedle) {
                 dateLabel: formatDate(d.timestamp)
             }));
             renderTrendBars('crypto-trend', trendData);
+
+            // Line chart (up to 30 days)
+            const chartData = json.data.slice(0, 30).reverse();
+            renderLineChart('crypto-chart',
+                chartData.map(d => formatDate(d.timestamp)),
+                chartData.map(d => parseInt(d.value)),
+                {
+                    color: '#3182f6',
+                    fillStops: [[0, 'rgba(49,130,246,0.2)'], [1, 'rgba(49,130,246,0.01)']],
+                    yMin: 0, yMax: 100, isVix: false,
+                }
+            );
 
         } catch (e) {
             console.error('Crypto FGI fetch error:', e);
@@ -366,6 +477,18 @@ if (cryptoNeedle) {
                     };
                 }).reverse();
                 renderTrendBars('stock-trend', recentData);
+
+                // Line chart (up to 30 days)
+                const chartSlice = histData.slice(-30);
+                renderLineChart('cnn-chart',
+                    chartSlice.map(d => { const dt = new Date(d.x); return `${dt.getMonth()+1}/${dt.getDate()}`; }),
+                    chartSlice.map(d => Math.round(d.y)),
+                    {
+                        color: '#e8593e',
+                        fillStops: [[0, 'rgba(232,89,62,0.2)'], [1, 'rgba(232,89,62,0.01)']],
+                        yMin: 0, yMax: 100, isVix: false,
+                    }
+                );
             }
         } else {
             showGaugeError('stock');
@@ -409,6 +532,18 @@ if (cryptoNeedle) {
                     }
                 }
                 renderVixTrendBars('vix-trend', trendData.slice(-7).reverse());
+
+                // Line chart (all available data)
+                const chartData = trendData.slice(-30);
+                renderLineChart('vix-chart',
+                    chartData.map(d => d.dateLabel),
+                    chartData.map(d => parseFloat(d.value)),
+                    {
+                        color: '#8b5cf6',
+                        fillStops: [[0, 'rgba(139,92,246,0.2)'], [1, 'rgba(139,92,246,0.01)']],
+                        yMin: 10, yMax: 50, isVix: true,
+                    }
+                );
             } else {
                 showGaugeError('vix');
             }

@@ -44,6 +44,8 @@
   "vix_status_stable": "안정",
   "vix_status_very_stable": "매우 안정",
 
+  "chart_section_title": "지수 추이 그래프",
+
   "what_title": "공포탐욕지수란?",
   "what_desc": "공포탐욕지수(Fear & Greed Index)는 시장 참여자들의 투자 심리를 0부터 100까지의 숫자로 나타낸 지표입니다. 0에 가까울수록 극도의 공포, 100에 가까울수록 극도의 탐욕 상태를 의미합니다.",
   "what_crypto_title": "크립토 공포탐욕지수",
