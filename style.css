@@ -101,7 +101,7 @@ body {
 }
 
 .header-inner {
-    max-width: 680px;
+    max-width: 780px;
     margin: 0 auto;
     padding: 12px 20px;
     display: flex;
@@ -217,7 +217,7 @@ body {
 
 /* ===== Container ===== */
 .container {
-    max-width: 680px;
+    max-width: 780px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -225,7 +225,7 @@ body {
 /* ===== Hero Section ===== */
 .hero-section {
     text-align: center;
-    padding: 56px 20px 32px;
+    padding: 48px 20px 24px;
 }
 
 .hero-section h1 {
@@ -256,83 +256,166 @@ body {
 .intro-text {
     font-size: 15px;
     line-height: 1.65;
-    max-width: 480px;
+    max-width: 520px;
     margin: 0 auto;
     color: var(--text-secondary);
 }
 
-/* ===== Recommender Section ===== */
-.recommender-section {
-    padding: 8px 0 40px;
+.auto-refresh-label {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    margin-top: 12px;
 }
 
-.recommender-section .container {
+/* ===== Dashboard Section ===== */
+.dashboard-section {
+    padding: 8px 0 32px;
+}
+
+.gauge-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.gauge-card {
     background-color: var(--bg-primary);
-    padding: 32px 24px;
+    padding: 28px 24px;
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-md);
     text-align: center;
     transition: background-color 0.25s ease, box-shadow 0.25s ease;
-    max-width: 420px;
     border: 1px solid var(--border-color);
 }
 
-.generator-container {
-    margin-bottom: 24px;
-}
-
-.meal-display {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 24px 16px;
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--text-primary);
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    min-height: 88px;
-    margin-bottom: 20px;
-    transition: background-color 0.25s ease;
-}
-
-#meal-image {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    border-radius: var(--radius-md);
-    margin-bottom: 12px;
-}
-
-#recommend-btn {
-    width: 100%;
-    padding: 16px 24px;
+.gauge-title {
     font-size: 16px;
     font-weight: 700;
-    color: var(--text-on-primary);
-    background-color: var(--color-primary);
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.15s;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.gauge-wrap {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.gauge-svg {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+    display: block;
+}
+
+.gauge-bg {
+    stroke: var(--bg-tertiary);
+}
+
+.gauge-fill {
+    opacity: 0.85;
+}
+
+.gauge-needle {
+    stroke: var(--text-primary);
+    transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gauge-dot {
+    fill: var(--text-primary);
+}
+
+.gauge-score {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-top: 4px;
+    transition: color 0.3s ease;
+}
+
+.gauge-label {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 2px;
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+}
+
+.gauge-updated {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+/* ===== Trend Bars ===== */
+.trend-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.trend-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
     letter-spacing: -0.01em;
 }
 
-#recommend-btn:hover {
-    background-color: var(--color-primary-hover);
+.trend-bars {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    align-items: flex-end;
+    height: 80px;
 }
 
-#recommend-btn:active {
-    transform: scale(0.98);
+.trend-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    max-width: 40px;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 4px;
 }
 
-.history-container {
-    margin-top: 28px;
-    text-align: left;
+.trend-value {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-tertiary);
 }
 
+.trend-bar-fill {
+    width: 100%;
+    border-radius: 4px 4px 2px 2px;
+    min-height: 4px;
+    transition: height 0.6s ease;
+}
+
+.trend-date {
+    font-size: 9px;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+}
+
+/* Stock fallback */
+.stock-fallback {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-md);
+}
+
+.stock-fallback p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+/* ===== Shared Section Styles ===== */
 h2 {
     font-size: 20px;
     font-weight: 700;
@@ -342,59 +425,38 @@ h2 {
     transition: color 0.25s ease;
 }
 
-#history-list {
-    list-style-type: none;
-    padding: 0;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-#history-list li {
-    background-color: var(--bg-secondary);
-    padding: 12px 16px;
-    border-radius: var(--radius-sm);
-    margin-bottom: 6px;
+.section-desc {
     font-size: 15px;
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: background-color 0.25s ease, color 0.25s ease;
-    animation: fadeSlideIn 0.3s ease;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
 }
 
-@keyframes fadeSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===== Section Shared ===== */
+.what-section,
 .howto-section,
-.target-section,
-.tips-preview-section,
-.faq-section,
-.about-values {
+.faq-section {
     padding: 48px 0;
 }
 
+.what-section h2,
 .howto-section h2,
-.target-section h2,
-.tips-preview-section h2,
-.faq-section h2,
-.about-values h2 {
+.faq-section h2 {
     text-align: center;
     margin-bottom: 24px;
     font-size: 22px;
 }
 
+.what-section .section-desc {
+    text-align: center;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* ===== Card Grid ===== */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
 }
 
@@ -424,48 +486,81 @@ h2 {
     color: var(--text-secondary);
 }
 
-/* ===== Tips Preview ===== */
-.tips-list {
+/* ===== Index Levels ===== */
+.index-levels {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.tip-item {
+.level-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
     background-color: var(--bg-secondary);
-    border: none;
     border-radius: var(--radius-lg);
-    padding: 20px 24px;
+    padding: 18px 20px;
     transition: background-color 0.25s;
 }
 
-.tip-item h3 {
+.level-range {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.level-extreme-fear .level-range { background-color: #ea3943; }
+.level-fear .level-range { background-color: #ea8c00; }
+.level-neutral .level-range { background-color: #f5c623; color: #191f28; }
+.level-greed .level-range { background-color: #6ec66a; }
+.level-extreme-greed .level-range { background-color: #16c784; }
+
+.level-info h3 {
     font-size: 15px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     color: var(--text-primary);
     letter-spacing: -0.02em;
 }
 
-.tip-item p {
+.level-info p {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.55;
     color: var(--text-secondary);
 }
 
-.cta-link {
-    display: inline-block;
-    margin-top: 20px;
-    color: var(--color-primary);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 15px;
-    transition: opacity 0.2s;
+/* ===== Disclaimer ===== */
+.disclaimer-section {
+    padding: 0 0 16px;
 }
 
-.cta-link:hover {
-    opacity: 0.7;
-    text-decoration: none;
+.disclaimer-box {
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    max-width: 780px;
+    margin: 0 auto;
+    border-left: 4px solid #ea8c00;
+}
+
+.disclaimer-box h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ea8c00;
+    margin-bottom: 6px;
+}
+
+.disclaimer-box p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
 }
 
 /* ===== FAQ ===== */
@@ -495,6 +590,21 @@ h2 {
     font-size: 14px;
     line-height: 1.6;
     color: var(--text-secondary);
+}
+
+/* ===== CTA Link ===== */
+.cta-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.cta-link:hover {
+    opacity: 0.7;
 }
 
 /* ===== Content Section (about, privacy, tips) ===== */
@@ -562,7 +672,7 @@ h2 {
     color: var(--text-tertiary);
 }
 
-/* ===== Tips Page ===== */
+/* ===== Guide Page (Tips) ===== */
 .tip-card {
     background-color: var(--bg-secondary);
     border: none;
@@ -595,8 +705,7 @@ h2 {
     transition: background-color 0.25s;
 }
 
-.season-list,
-.nutrition-list {
+.guide-levels-list {
     list-style: none;
     padding: 0;
     margin-top: 10px;
@@ -605,8 +714,7 @@ h2 {
     gap: 4px;
 }
 
-.season-list li,
-.nutrition-list li {
+.guide-levels-list li {
     padding: 10px 16px;
     background-color: var(--bg-tertiary);
     border-radius: var(--radius-sm);
@@ -615,42 +723,17 @@ h2 {
     transition: background-color 0.25s;
 }
 
-/* Category Grid */
-.category-section h2 {
+/* ===== About Values / Target ===== */
+.target-section,
+.about-values {
+    padding: 48px 0;
+}
+
+.target-section h2,
+.about-values h2 {
     text-align: center;
     margin-bottom: 24px;
     font-size: 22px;
-}
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
-}
-
-.category-card {
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    transition: background-color 0.25s, transform 0.2s;
-}
-
-.category-card:hover {
-    transform: translateY(-2px);
-}
-
-.category-card h3 {
-    color: var(--text-primary);
-    margin-bottom: 8px;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.category-card p {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--text-secondary);
 }
 
 /* ===== CTA Section ===== */
@@ -765,7 +848,7 @@ h2 {
 /* ===== Ad Container ===== */
 .ad-container {
     width: 100%;
-    max-width: 680px;
+    max-width: 780px;
     margin: 8px auto;
     padding: 0 20px;
     text-align: center;
@@ -781,7 +864,7 @@ h2 {
 }
 
 .footer-inner {
-    max-width: 680px;
+    max-width: 780px;
     margin: 0 auto;
     text-align: center;
 }
@@ -849,11 +932,16 @@ h2 {
     }
 
     .hero-section {
-        padding: 40px 20px 24px;
+        padding: 36px 20px 20px;
     }
 
     .hero-section h1 {
         font-size: 24px;
+    }
+
+    .gauge-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .card-grid {
@@ -861,14 +949,8 @@ h2 {
         gap: 8px;
     }
 
-    .category-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-    }
-
+    .what-section,
     .howto-section,
-    .target-section,
-    .tips-preview-section,
     .faq-section,
     .about-values {
         padding: 36px 0;
@@ -889,7 +971,7 @@ h2 {
     }
 
     .hero-section {
-        padding: 32px 16px 20px;
+        padding: 28px 16px 16px;
     }
 
     .hero-section h1 {
@@ -908,18 +990,28 @@ h2 {
         padding: 0 16px;
     }
 
-    .recommender-section .container {
-        padding: 24px 20px;
-        border-radius: var(--radius-lg);
+    .gauge-card {
+        padding: 24px 16px;
     }
 
-    .meal-display {
-        font-size: 24px;
-        padding: 20px 12px;
+    .gauge-score {
+        font-size: 30px;
     }
 
-    .category-grid {
-        grid-template-columns: 1fr;
+    .level-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .level-range {
+        width: 44px;
+        height: 44px;
+        font-size: 11px;
+    }
+
+    .trend-bars {
+        height: 60px;
+        gap: 4px;
     }
 
     .contact-form-container .container {
