@@ -45,6 +45,11 @@
   "vix_status_very_stable": "Very Stable",
 
   "chart_section_title": "Index Trend Charts",
+  "period_30d": "30D",
+  "period_1y": "1Y",
+  "period_3y": "3Y",
+  "period_5y": "5Y",
+  "period_10y": "10Y",
 
   "what_title": "What is the Fear & Greed Index?",
   "what_desc": "The Fear & Greed Index measures market sentiment on a scale from 0 to 100. A score close to 0 indicates extreme fear, while a score close to 100 indicates extreme greed among market participants.",

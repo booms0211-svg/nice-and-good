@@ -472,6 +472,37 @@ h2 {
     font-size: 22px;
 }
 
+.chart-period-selector {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.chart-period-btn {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.chart-period-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+}
+
+.chart-period-btn.active {
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+    border-color: var(--color-primary);
+}
+
 .chart-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
