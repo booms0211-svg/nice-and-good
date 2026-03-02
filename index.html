@@ -19,10 +19,10 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>공포탐욕지수 - 나스닥 & 크립토 & VIX 투자 심리 지표</title>
-    <meta name="description" content="나스닥(CNN), 크립토, VIX 변동성지수를 실시간으로 확인하세요. 투자 심리를 0~100으로 수치화한 무료 대시보드.">
-    <meta property="og:title" content="공포탐욕지수 - 나스닥 & 크립토 & VIX 투자 심리 지표">
-    <meta property="og:description" content="나스닥, 크립토, VIX 시장의 투자 심리를 실시간으로 확인하세요.">
+    <title>사주팔자 - 만세력 기반 사주풀이 서비스</title>
+    <meta name="description" content="생년월일시를 입력하여 당신의 사주팔자를 확인하세요. 만세력 기반의 정확한 사주풀이를 제공합니다.">
+    <meta property="og:title" content="사주팔자 - 만세력 기반 사주풀이 서비스">
+    <meta property="og:description" content="생년월일시를 입력하여 당신의 사주팔자를 확인하세요.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://booms0211-svg.github.io/nice-and-good/">
     <link rel="canonical" href="https://booms0211-svg.github.io/nice-and-good/">
@@ -72,258 +72,30 @@
     </header>
 
     <main class="main-content">
-        <section class="hero-section">
+        <section class="saju-section">
             <div class="container">
-                <h1 data-i18n="h1">공포탐욕지수</h1>
-                <p class="intro-text" data-i18n="intro_desc">나스닥과 크립토 시장의 투자 심리를 실시간으로 확인하세요. 공포탐욕지수는 시장 참여자들의 감정 상태를 0~100으로 수치화한 지표입니다.</p>
-                <p class="auto-refresh-label" data-i18n="auto_refresh">5분마다 자동 갱신</p>
-            </div>
-        </section>
-
-        <section class="dashboard-section">
-            <div class="container">
-                <div class="gauge-grid">
-                    <!-- Crypto Fear & Greed -->
-                    <div class="gauge-card" id="crypto-card">
-                        <h2 class="gauge-title" data-i18n="crypto_title">크립토 공포탐욕지수</h2>
-                        <div class="gauge-wrap">
-                            <svg viewBox="0 0 200 120" class="gauge-svg" id="crypto-gauge">
-                                <defs>
-                                    <linearGradient id="gaugeGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#ea3943"/>
-                                        <stop offset="30%" stop-color="#ea8c00"/>
-                                        <stop offset="50%" stop-color="#f5c623"/>
-                                        <stop offset="70%" stop-color="#6ec66a"/>
-                                        <stop offset="100%" stop-color="#16c784"/>
-                                    </linearGradient>
-                                </defs>
-                                <path class="gauge-bg" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke-width="18" stroke-linecap="round"/>
-                                <path class="gauge-fill" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="url(#gaugeGrad1)" stroke-width="18" stroke-linecap="round"/>
-                                <line class="gauge-needle" id="crypto-needle" x1="100" y1="105" x2="25" y2="105" stroke-width="2.5" stroke-linecap="round"/>
-                                <circle class="gauge-dot" cx="100" cy="105" r="4"/>
-                            </svg>
-                            <div class="gauge-score" id="crypto-score" data-i18n="score_loading">로딩 중...</div>
-                            <div class="gauge-label" id="crypto-label"></div>
-                        </div>
-                        <div class="gauge-updated" id="crypto-updated"></div>
-                        <div class="trend-section">
-                            <h3 class="trend-title" data-i18n="trend_title">최근 7일 추이</h3>
-                            <div class="trend-bars" id="crypto-trend"></div>
-                        </div>
+                <h1 data-i18n="saju_title">사주팔자 알아보기</h1>
+                <p class="intro-text" data-i18n="saju_intro">생년월일시를 입력하면 당신의 사주를 알려드립니다.</p>
+                <div class="saju-form">
+                    <div class="form-group">
+                        <label for="year">년</label>
+                        <input type="number" id="year" placeholder="1990">
                     </div>
-
-                    <!-- CNN Fear & Greed -->
-                    <div class="gauge-card" id="stock-card">
-                        <h2 class="gauge-title" data-i18n="stock_title">CNN 공포탐욕지수</h2>
-                        <div class="gauge-wrap">
-                            <svg viewBox="0 0 200 120" class="gauge-svg" id="stock-gauge">
-                                <defs>
-                                    <linearGradient id="gaugeGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#ea3943"/>
-                                        <stop offset="30%" stop-color="#ea8c00"/>
-                                        <stop offset="50%" stop-color="#f5c623"/>
-                                        <stop offset="70%" stop-color="#6ec66a"/>
-                                        <stop offset="100%" stop-color="#16c784"/>
-                                    </linearGradient>
-                                </defs>
-                                <path class="gauge-bg" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke-width="18" stroke-linecap="round"/>
-                                <path class="gauge-fill" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="url(#gaugeGrad2)" stroke-width="18" stroke-linecap="round"/>
-                                <line class="gauge-needle" id="stock-needle" x1="100" y1="105" x2="25" y2="105" stroke-width="2.5" stroke-linecap="round"/>
-                                <circle class="gauge-dot" cx="100" cy="105" r="4"/>
-                            </svg>
-                            <div class="gauge-score" id="stock-score" data-i18n="score_loading">로딩 중...</div>
-                            <div class="gauge-label" id="stock-label"></div>
-                        </div>
-                        <div class="gauge-updated" id="stock-updated"></div>
-                        <div class="trend-section" id="stock-trend-section">
-                            <h3 class="trend-title" data-i18n="trend_title">최근 7일 추이</h3>
-                            <div class="trend-bars" id="stock-trend"></div>
-                        </div>
-                        <div class="stock-fallback" id="stock-fallback" style="display:none;">
-                            <p data-i18n="data_unavailable_desc">CNN 서버에 직접 접속하여 확인하세요.</p>
-                            <a href="https://edition.cnn.com/markets/fear-and-greed" target="_blank" rel="noopener noreferrer" class="cta-link" data-i18n="view_on_cnn">CNN에서 보기</a>
-                        </div>
+                    <div class="form-group">
+                        <label for="month">월</label>
+                        <input type="number" id="month" placeholder="5">
                     </div>
-
-                    <!-- VIX Volatility Index -->
-                    <div class="gauge-card" id="vix-card">
-                        <h2 class="gauge-title" data-i18n="vix_title">VIX 변동성지수</h2>
-                        <div class="gauge-wrap">
-                            <svg viewBox="0 0 200 120" class="gauge-svg" id="vix-gauge">
-                                <defs>
-                                    <linearGradient id="gaugeGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#16c784"/>
-                                        <stop offset="15%" stop-color="#6ec66a"/>
-                                        <stop offset="35%" stop-color="#f5c623"/>
-                                        <stop offset="60%" stop-color="#ea8c00"/>
-                                        <stop offset="100%" stop-color="#ea3943"/>
-                                    </linearGradient>
-                                </defs>
-                                <path class="gauge-bg" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke-width="18" stroke-linecap="round"/>
-                                <path class="gauge-fill" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="url(#gaugeGrad3)" stroke-width="18" stroke-linecap="round"/>
-                                <line class="gauge-needle" id="vix-needle" x1="100" y1="105" x2="25" y2="105" stroke-width="2.5" stroke-linecap="round"/>
-                                <circle class="gauge-dot" cx="100" cy="105" r="4"/>
-                            </svg>
-                            <div class="gauge-score" id="vix-score" data-i18n="score_loading">로딩 중...</div>
-                            <div class="gauge-label" id="vix-label"></div>
-                        </div>
-                        <div class="gauge-updated" id="vix-updated"></div>
-                        <div class="trend-section">
-                            <h3 class="trend-title" data-i18n="trend_title">최근 7일 추이</h3>
-                            <div class="trend-bars" id="vix-trend"></div>
-                        </div>
+                    <div class="form-group">
+                        <label for="day">일</label>
+                        <input type="number" id="day" placeholder="15">
                     </div>
+                    <div class="form-group">
+                        <label for="hour">시</label>
+                        <input type="number" id="hour" placeholder="14">
+                    </div>
+                    <button id="calculate-btn" data-i18n="calculate_btn">사주 보기</button>
                 </div>
-            </div>
-        </section>
-
-        <section class="chart-section">
-            <div class="container">
-                <h2 data-i18n="chart_section_title">지수 추이 그래프</h2>
-                <div class="chart-period-selector">
-                    <button class="chart-period-btn active" data-period="30d" data-i18n="period_30d">30일</button>
-                    <button class="chart-period-btn" data-period="1y" data-i18n="period_1y">1년</button>
-                    <button class="chart-period-btn" data-period="3y" data-i18n="period_3y">3년</button>
-                    <button class="chart-period-btn" data-period="5y" data-i18n="period_5y">5년</button>
-                    <button class="chart-period-btn" data-period="10y" data-i18n="period_10y">10년</button>
-                </div>
-                <div class="chart-grid">
-                    <div class="chart-card">
-                        <h3 data-i18n="crypto_title">크립토 공포탐욕지수</h3>
-                        <div class="chart-wrap"><canvas id="crypto-chart"></canvas></div>
-                    </div>
-                    <div class="chart-card">
-                        <h3 data-i18n="stock_title">CNN 공포탐욕지수</h3>
-                        <div class="chart-wrap"><canvas id="cnn-chart"></canvas></div>
-                    </div>
-                    <div class="chart-card">
-                        <h3 data-i18n="vix_title">VIX 변동성지수</h3>
-                        <div class="chart-wrap"><canvas id="vix-chart"></canvas></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="what-section">
-            <div class="container">
-                <h2 data-i18n="what_title">공포탐욕지수란?</h2>
-                <p class="section-desc" data-i18n="what_desc">공포탐욕지수(Fear & Greed Index)는 시장 참여자들의 투자 심리를 0부터 100까지의 숫자로 나타낸 지표입니다.</p>
-                <div class="card-grid">
-                    <div class="card">
-                        <h3 data-i18n="what_crypto_title">크립토 공포탐욕지수</h3>
-                        <p data-i18n="what_crypto_desc">Alternative.me에서 제공하는 크립토 공포탐욕지수는 비트코인과 암호화폐 시장의 심리를 측정합니다.</p>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="what_stock_title">CNN 공포탐욕지수</h3>
-                        <p data-i18n="what_stock_desc">CNN에서 제공하는 공포탐욕지수는 미국 주식시장(S&P 500, 나스닥 등)의 투자 심리를 측정합니다.</p>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="what_vix_title">VIX 변동성지수</h3>
-                        <p data-i18n="what_vix_desc">CBOE에서 산출하는 VIX는 S&P 500 옵션 가격에서 향후 30일간의 시장 변동성 기대치를 측정합니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="ad-container">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-2315053959173850"
-                 data-ad-slot="auto"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <section class="howto-section">
-            <div class="container">
-                <h2 data-i18n="howto_title">지수 해석 방법</h2>
-                <div class="index-levels">
-                    <div class="level-item level-extreme-fear">
-                        <div class="level-range">0-24</div>
-                        <div class="level-info">
-                            <h3 data-i18n="howto_1_title">0~24: 극도의 공포</h3>
-                            <p data-i18n="howto_1_desc">시장 참여자들이 극도로 두려워하는 상태입니다.</p>
-                        </div>
-                    </div>
-                    <div class="level-item level-fear">
-                        <div class="level-range">25-44</div>
-                        <div class="level-info">
-                            <h3 data-i18n="howto_2_title">25~44: 공포</h3>
-                            <p data-i18n="howto_2_desc">시장에 불안감이 퍼진 상태입니다.</p>
-                        </div>
-                    </div>
-                    <div class="level-item level-neutral">
-                        <div class="level-range">45-55</div>
-                        <div class="level-info">
-                            <h3 data-i18n="howto_3_title">45~55: 중립</h3>
-                            <p data-i18n="howto_3_desc">시장 심리가 균형을 이루고 있습니다.</p>
-                        </div>
-                    </div>
-                    <div class="level-item level-greed">
-                        <div class="level-range">56-74</div>
-                        <div class="level-info">
-                            <h3 data-i18n="howto_4_title">56~74: 탐욕</h3>
-                            <p data-i18n="howto_4_desc">시장 참여자들이 낙관적인 상태입니다.</p>
-                        </div>
-                    </div>
-                    <div class="level-item level-extreme-greed">
-                        <div class="level-range">75-100</div>
-                        <div class="level-info">
-                            <h3 data-i18n="howto_5_title">75~100: 극도의 탐욕</h3>
-                            <p data-i18n="howto_5_desc">시장이 과열된 상태입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="disclaimer-section">
-            <div class="container">
-                <div class="disclaimer-box">
-                    <h3 data-i18n="disclaimer_title">투자 유의사항</h3>
-                    <p data-i18n="disclaimer_desc">본 서비스에서 제공하는 정보는 투자 참고용이며, 투자 권유나 조언이 아닙니다.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="faq-section">
-            <div class="container">
-                <h2 data-i18n="faq_title">자주 묻는 질문 (FAQ)</h2>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <h3 data-i18n="faq_1_q">Q. 공포탐욕지수는 무료인가요?</h3>
-                        <p data-i18n="faq_1_a">네, 완전히 무료입니다.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 data-i18n="faq_2_q">Q. 데이터는 얼마나 자주 업데이트되나요?</h3>
-                        <p data-i18n="faq_2_a">크립토는 매일 1회, CNN은 장중 실시간 업데이트됩니다.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 data-i18n="faq_3_q">Q. 이 지수만으로 투자 결정을 해도 되나요?</h3>
-                        <p data-i18n="faq_3_a">아닙니다. 보조 지표로만 활용하세요.</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 data-i18n="faq_4_q">Q. 모바일에서도 사용할 수 있나요?</h3>
-                        <p data-i18n="faq_4_a">네, 모바일에 최적화되어 있습니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-form-container" id="contact">
-            <div class="container">
-                <h2 data-i18n="contact_inquiry">제휴 문의</h2>
-                <p data-i18n="contact_description">서비스에 관심을 가져주셔서 감사합니다.</p>
-                <form action="https://formspree.io/f/xpqjdqbj" method="POST" class="contact-form">
-                    <label for="name" data-i18n="name_label">이름:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="email" data-i18n="email_label">이메일:</label>
-                    <input type="email" id="email" name="_replyto" required>
-                    <label for="message" data-i18n="message_label">메시지:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                    <button type="submit" data-i18n="submit_button">보내기</button>
-                </form>
+                <div id="saju-result" class="saju-result"></div>
             </div>
         </section>
     </main>
@@ -340,6 +112,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@fullstackfamily/manseryeok/dist/bundle.min.js"></script>
     <script src="main.js" type="module"></script>
 </body>
 </html>
