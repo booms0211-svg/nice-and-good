@@ -1,34 +1,35 @@
-/* ===== Design Tokens (New Saju Theme) ===== */
+
+/* ===== Apple-Inspired Design System ===== */
 :root {
-    --color-blue: #2E65A8; /* Cheong (청) */
-    --color-red: #D84B4B;  /* Jeok (적) */
-    --color-yellow: #F2C75C; /* Hwang (황) */
-    --color-white: #FFFFFF; /* Baek (백) */
-    --color-black: #333333; /* Heuk (흑) */
-
-    --bg-primary: #f8f6f2; /* Soft, paper-like background */
-    --bg-secondary: var(--color-white);
+    --accent-blue: #007aff;
+    --accent-blue-light: rgba(0, 122, 255, 0.1);
     
-    --text-primary: var(--color-black);
-    --text-secondary: #6B5B5B;
-    --text-on-primary: var(--color-white);
-
-    --border-color: #E6DED5;
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-
-    --radius-md: 10px;
-    --radius-lg: 16px;
+    --bg-primary: #f3f4f6; 
+    --bg-glass: rgba(255, 255, 255, 0.6);
     
-    --font-main: 'Noto Sans KR', sans-serif;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    
+    --border-color: rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+    --radius-l: 22px;
+    --radius-m: 14px;
+    
+    --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body.dark-theme {
-    --bg-primary: #2c2a31;
-    --bg-secondary: #3d3a44;
-    --text-primary: #f2eef7;
-    --text-secondary: #b0a8c0;
-    --border-color: #514d59;
+    --accent-blue: #0a84ff;
+    --accent-blue-light: rgba(10, 132, 255, 0.15);
+    
+    --bg-primary: #1a1a1c;
+    --bg-glass: rgba(29, 29, 31, 0.7);
+
+    --text-primary: #f5f5f7;
+    --text-secondary: #86868b;
+    
+    --border-color: rgba(255, 255, 255, 0.15);
 }
 
 /* ===== Reset & Base ===== */
@@ -38,66 +39,43 @@ body.dark-theme {
     box-sizing: border-box;
 }
 
-html {
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-}
-
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-system);
     background-color: var(--bg-primary);
+    background-image:
+        radial-gradient(at 20% 15%, hsla(212, 80%, 85%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 80% 25%, hsla(280, 70%, 80%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 75% 85%, hsla(190, 75%, 85%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 15% 90%, hsla(340, 60%, 80%, 0.3) 0px, transparent 50%);
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 16px;
-    line-height: 1.7;
-}
-
-/* ===== Header ===== */
-.site-header {
-    width: 100%;
-    background-color: transparent;
-    padding: 20px 0;
-}
-
-.header-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 17px;
+    line-height: 1.4;
+    letter-spacing: -0.022em;
+    -webkit-font-smoothing: antialiased;
 }
 
-.site-logo {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-decoration: none;
-}
+/* Hide header/footer from previous design */
+.site-header, .site-footer { display: none; }
 
-/* Hide unnecessary header elements */
-.nav-toggle, .site-nav, .header-actions {
-    display: none;
-}
-
-/* ===== Main Content ===== */
+/* ===== Main Content & Container ===== */
 .main-content {
     flex: 1;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 24px;
 }
 
 .container {
-    max-width: 680px;
+    max-width: 540px;
     width: 100%;
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 /* ===== Saju Section ===== */
@@ -107,29 +85,39 @@ body {
 }
 
 .saju-section h1 {
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 48px;
+    font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 8px;
+    letter-spacing: -0.025em;
 }
 
 .saju-section .intro-text {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--text-secondary);
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== Glassmorphism Form/Result ===== */
+.saju-form, .saju-result {
+    background: var(--bg-glass);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-radius: var(--radius-l);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    padding: 32px;
 }
 
 .saju-form {
-    background: var(--bg-secondary);
-    padding: 32px;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
     margin-bottom: 40px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
     text-align: left;
-    border: 1px solid var(--border-color);
 }
 
 .form-group {
@@ -140,58 +128,48 @@ body {
 
 .form-group label {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 15px;
     color: var(--text-secondary);
+    padding-left: 4px;
 }
 
 .form-group input {
-    padding: 14px 18px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    font-size: 16px;
-    background-color: var(--bg-primary);
+    background-color: rgba(120, 120, 128, 0.12);
+    border: none;
+    border-radius: var(--radius-m);
+    padding: 16px;
+    font-size: 17px;
     color: var(--text-primary);
     transition: all 0.2s ease;
-    font-family: var(--font-main);
+    font-family: var(--font-system);
     width: 100%;
 }
 
 .form-group input:focus {
     outline: none;
-    border-color: var(--color-blue);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue) 20%, transparent);
+    box-shadow: 0 0 0 4px var(--accent-blue-light);
 }
 
 #calculate-btn {
     grid-column: 1 / -1;
     padding: 18px 24px;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-on-primary);
-    background: linear-gradient(135deg, var(--color-blue), color-mix(in srgb, var(--color-blue) 80%, var(--color-black)));
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    background-color: var(--accent-blue);
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-m);
     cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font-main);
+    transition: background-color 0.2s;
+    font-family: var(--font-system);
 }
 
 #calculate-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    filter: brightness(1.1);
 }
 
-#calculate-btn:active {
-    transform: translateY(0);
-}
-
+/* ===== Result Display ===== */
 .saju-result {
-    margin-top: 40px;
-    padding: 32px;
-    background-color: var(--bg-secondary);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-md);
     display: none; /* Hidden by default */
 }
 
@@ -201,95 +179,58 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .saju-result h2 {
     font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 24px;
+    font-weight: 600;
+    margin-bottom: 28px;
     text-align: center;
     color: var(--text-primary);
 }
 
 .saju-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    text-align: center;
+    grid-template-columns: 1fr;
+    gap: 16px;
 }
 
 .saju-pillar {
-    padding: 20px 10px;
-    background-color: var(--bg-primary);
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: rgba(120, 120, 128, 0.08);
+    border-radius: var(--radius-m);
 }
 
 .saju-pillar h3 {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 500;
     color: var(--text-secondary);
-    margin-bottom: 12px;
 }
 
 .saju-pillar p {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--color-blue);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text-primary);
     letter-spacing: 0.1em;
-    font-family: 'Gugi', cursive; /* A more stylized font for the result */
-}
-
-/* Add Gugi font for the result */
-@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
-
-/* ===== Footer ===== */
-.site-footer {
-    width: 100%;
-    background-color: transparent;
-    padding: 32px 20px;
-}
-
-.footer-inner {
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.copyright {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-/* Hide unnecessary footer elements */
-.footer-nav {
-    display: none;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .main-content { padding: 16px; }
+    
+    .saju-section h1 { font-size: 36px; }
+    .saju-section .intro-text { font-size: 18px; }
+
     .saju-form {
         grid-template-columns: 1fr;
         padding: 24px;
     }
-    .saju-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .saju-section h1 {
-        font-size: 30px;
-    }
-    .saju-section .intro-text {
-        font-size: 16px;
-    }
-}
 
-@media (max-width: 400px) {
-    .saju-grid {
-        grid-template-columns: 1fr;
-    }
-    .saju-pillar p {
-        font-size: 24px;
-    }
+    .saju-pillar p { font-size: 20px; }
 }
