@@ -1,3 +1,4 @@
+import { calculateSaju } from 'https://esm.sh/@fullstackfamily/manseryeok';
 
 const calculateBtn = document.getElementById('calculate-btn');
 const resultDiv = document.getElementById('saju-result');
@@ -14,7 +15,7 @@ calculateBtn.addEventListener('click', () => {
     }
 
     try {
-        const saju = Manseryeok.calculateSaju(year, month, day, hour);
+        const saju = calculateSaju(year, month, day, hour);
         
         resultDiv.innerHTML = `
             <h2>당신의 사주팔자</h2>
