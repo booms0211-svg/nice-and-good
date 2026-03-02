@@ -1,35 +1,18 @@
-/* ===== Apple-Inspired Design System ===== */
+
+/* ===== Tesla-Inspired Design System ===== */
 :root {
-    --accent-blue: #007aff;
-    --accent-blue-light: rgba(0, 122, 255, 0.1);
-    
-    --bg-primary: #f3f4f6; 
-    --bg-glass: rgba(255, 255, 255, 0.6);
-    
-    --text-primary: #1d1d1f;
-    --text-secondary: #6e6e73;
-    
-    --border-color: rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --accent-red: #e82127;
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #8d8d8d;
+    --border-color: #333333;
 
-    --radius-l: 22px;
-    --radius-m: 14px;
-    
-    --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-main: 'Montserrat', sans-serif;
+    --font-mono: 'Source Code Pro', monospace;
 }
 
-body.dark-theme {
-    --accent-blue: #0a84ff;
-    --accent-blue-light: rgba(10, 132, 255, 0.15);
-    
-    --bg-primary: #1a1a1c;
-    --bg-glass: rgba(29, 29, 31, 0.7);
-
-    --text-primary: #f5f5f7;
-    --text-secondary: #86868b;
-    
-    --border-color: rgba(255, 255, 255, 0.15);
-}
+/* No dark theme needed, it's default dark */
 
 /* ===== Reset & Base ===== */
 *, *::before, *::after {
@@ -39,22 +22,15 @@ body.dark-theme {
 }
 
 body {
-    font-family: var(--font-system);
+    font-family: var(--font-main);
     background-color: var(--bg-primary);
-    background-image:
-        radial-gradient(at 20% 15%, hsla(212, 80%, 85%, 0.3) 0px, transparent 50%),
-        radial-gradient(at 80% 25%, hsla(280, 70%, 80%, 0.3) 0px, transparent 50%),
-        radial-gradient(at 75% 85%, hsla(190, 75%, 85%, 0.3) 0px, transparent 50%),
-        radial-gradient(at 15% 90%, hsla(340, 60%, 80%, 0.3) 0px, transparent 50%);
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: background-color 0.3s, color 0.3s;
-    font-size: 17px;
-    line-height: 1.5;
-    letter-spacing: -0.022em;
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -64,30 +40,37 @@ body {
     flex-shrink: 0;
 }
 .header-inner, .footer-inner {
-    max-width: 540px;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 .site-logo {
     font-weight: 600;
+    font-size: 18px;
     color: var(--text-primary);
     text-decoration: none;
 }
-.site-nav a, .footer-nav a {
+.site-nav {
+    display: flex;
+    gap: 16px;
+}
+.site-nav a {
     color: var(--text-secondary);
     text-decoration: none;
-    padding: 4px 8px;
     transition: color 0.2s;
 }
-.site-nav a:hover, .footer-nav a:hover {
-    color: var(--accent-blue);
+.site-nav a:hover {
+    color: var(--text-primary);
 }
 .footer-inner {
-    font-size: 14px;
+    justify-content: center;
+    font-size: 12px;
     color: var(--text-secondary);
 }
 
@@ -102,7 +85,7 @@ body {
 }
 
 .container {
-    max-width: 540px;
+    max-width: 680px;
     width: 100%;
 }
 
@@ -113,30 +96,25 @@ body {
 }
 
 .saju-section h1 {
-    font-size: 44px;
+    font-size: 40px;
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 8px;
-    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .saju-section .intro-text {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-secondary);
     margin-bottom: 48px;
-    max-width: 420px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-/* ===== Glassmorphism Form/Result ===== */
+/* ===== Form & Result Containers ===== */
 .saju-form, .saju-result, .content-section {
-    background: var(--bg-glass);
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    border-radius: var(--radius-l);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    box-shadow: var(--shadow-md);
+    border-radius: 4px;
     padding: 32px;
     margin-bottom: 40px;
 }
@@ -144,60 +122,59 @@ body {
 .saju-form {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
     text-align: left;
 }
-
-#calculate-btn {
-    grid-column: 1 / -1;
-}
-
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .form-group label {
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     color: var(--text-secondary);
-    padding-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .form-group input {
-    background-color: rgba(120, 120, 128, 0.12);
-    border: none;
-    border-radius: var(--radius-m);
-    padding: 16px;
-    font-size: 17px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    padding: 14px;
+    font-size: 16px;
     color: var(--text-primary);
     transition: all 0.2s ease;
-    font-family: var(--font-system);
+    font-family: var(--font-main);
     width: 100%;
 }
 
 .form-group input:focus {
     outline: none;
-    box-shadow: 0 0 0 4px var(--accent-blue-light);
+    border-color: var(--accent-red);
 }
 
 #calculate-btn {
-    padding: 18px 24px;
-    font-size: 17px;
+    grid-column: 1 / -1;
+    padding: 16px 24px;
+    font-size: 16px;
     font-weight: 600;
     color: white;
-    background-color: var(--accent-blue);
+    background-color: var(--accent-red);
     border: none;
-    border-radius: var(--radius-m);
+    border-radius: 2px;
     cursor: pointer;
     transition: background-color 0.2s;
-    font-family: var(--font-system);
+    font-family: var(--font-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 #calculate-btn:hover {
-    filter: brightness(1.1);
+    background-color: #ff3c41;
 }
 
 /* ===== Result Display ===== */
@@ -211,82 +188,91 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .saju-result h2 {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     text-align: center;
     color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
 .saju-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 8px;
 }
 
 .saju-pillar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
-    background-color: rgba(120, 120, 128, 0.08);
-    border-radius: var(--radius-m);
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+}
+.saju-pillar:last-child {
+    border-bottom: none;
 }
 
 .saju-pillar h3 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
     color: var(--text-secondary);
 }
 
 .saju-pillar p {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: var(--text-primary);
     letter-spacing: 0.05em;
 }
 .saju-pillar p span {
-    font-size: 17px;
+    font-family: var(--font-mono);
+    font-size: 18px;
     font-weight: 400;
     color: var(--text-secondary);
-    margin-left: 8px;
+    margin-left: 12px;
 }
 
 /* ===== AdSense Content Section ===== */
 .content-section {
-    text-align: left;
+    text-align: center;
 }
 .content-section h2 {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 .content-section p {
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto;
 }
 .content-section p:not(:last-child) {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
-    body { font-size: 16px; }
     .main-content { padding: 16px; }
     
-    .saju-section h1 { font-size: 36px; }
-    .saju-section .intro-text { font-size: 18px; }
+    .saju-section h1 { font-size: 28px; }
+    .saju-section .intro-text { font-size: 14px; }
 
     .saju-form {
         grid-template-columns: 1fr;
         padding: 24px;
     }
 
-    .saju-pillar p { font-size: 18px; }
+    .saju-pillar p { font-size: 16px; }
+    .saju-pillar p span { font-size: 16px; }
 }
