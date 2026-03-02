@@ -1,84 +1,212 @@
+/* ===== Design Tokens (New Saju Theme) ===== */
+:root {
+    --color-blue: #2E65A8; /* Cheong (청) */
+    --color-red: #D84B4B;  /* Jeok (적) */
+    --color-yellow: #F2C75C; /* Hwang (황) */
+    --color-white: #FFFFFF; /* Baek (백) */
+    --color-black: #333333; /* Heuk (흑) */
 
-/* ===== Saju Service Styles ===== */
+    --bg-primary: #f8f6f2; /* Soft, paper-like background */
+    --bg-secondary: var(--color-white);
+    
+    --text-primary: var(--color-black);
+    --text-secondary: #6B5B5B;
+    --text-on-primary: var(--color-white);
+
+    --border-color: #E6DED5;
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    
+    --font-main: 'Noto Sans KR', sans-serif;
+}
+
+body.dark-theme {
+    --bg-primary: #2c2a31;
+    --bg-secondary: #3d3a44;
+    --text-primary: #f2eef7;
+    --text-secondary: #b0a8c0;
+    --border-color: #514d59;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* ===== Header ===== */
+.site-header {
+    width: 100%;
+    background-color: transparent;
+    padding: 20px 0;
+}
+
+.header-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* Hide unnecessary header elements */
+.nav-toggle, .site-nav, .header-actions {
+    display: none;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 680px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== Saju Section ===== */
 .saju-section {
-    padding: 48px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.saju-section h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.saju-section .intro-text {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
 }
 
 .saju-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: flex-end;
-    margin-bottom: 32px;
-    background-color: var(--bg-secondary);
-    padding: 24px;
-    border-radius: var(--radius-xl);
+    background: var(--bg-secondary);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    text-align: left;
+    border: 1px solid var(--border-color);
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    flex: 1 1 100px;
 }
 
 .form-group label {
-    font-weight: 600;
-    font-size: 14px;
+    font-weight: 500;
+    font-size: 16px;
     color: var(--text-secondary);
 }
 
 .form-group input {
-    padding: 14px 16px;
+    padding: 14px 18px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    font-size: 15px;
+    font-size: 16px;
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: border-color 0.2s ease, background-color 0.25s ease, box-shadow 0.2s ease;
-    outline: none;
-    font-family: inherit;
+    transition: all 0.2s ease;
+    font-family: var(--font-main);
     width: 100%;
 }
 
 .form-group input:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px var(--color-primary-light);
+    outline: none;
+    border-color: var(--color-blue);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-blue) 20%, transparent);
 }
 
 #calculate-btn {
-    padding: 14px 24px;
-    font-size: 16px;
+    grid-column: 1 / -1;
+    padding: 18px 24px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--text-on-primary);
-    background-color: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-blue), color-mix(in srgb, var(--color-blue) 80%, var(--color-black)));
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.15s;
-    font-family: inherit;
-    letter-spacing: -0.01em;
-    flex: 1 1 auto;
+    transition: all 0.2s;
+    font-family: var(--font-main);
 }
 
 #calculate-btn:hover {
-    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
 #calculate-btn:active {
-    transform: scale(0.98);
+    transform: translateY(0);
 }
 
 .saju-result {
-    margin-top: 32px;
-    padding: 24px;
+    margin-top: 40px;
+    padding: 32px;
     background-color: var(--bg-secondary);
-    border-radius: var(--radius-xl);
+    border-radius: var(--radius-lg);
     border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    display: none; /* Hidden by default */
+}
+
+.saju-result.visible {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .saju-result h2 {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 24px;
     text-align: center;
@@ -88,43 +216,80 @@
 .saju-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 20px;
     text-align: center;
 }
 
 .saju-pillar {
-    padding: 20px;
+    padding: 20px 10px;
     background-color: var(--bg-primary);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
 }
 
 .saju-pillar h3 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-secondary);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .saju-pillar p {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    color: var(--text-primary);
+    color: var(--color-blue);
     letter-spacing: 0.1em;
+    font-family: 'Gugi', cursive; /* A more stylized font for the result */
 }
 
-@media (max-width: 768px) {
+/* Add Gugi font for the result */
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+/* ===== Footer ===== */
+.site-footer {
+    width: 100%;
+    background-color: transparent;
+    padding: 32px 20px;
+}
+
+.footer-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Hide unnecessary footer elements */
+.footer-nav {
+    display: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
     .saju-form {
-        flex-direction: column;
-        align-items: stretch;
+        grid-template-columns: 1fr;
+        padding: 24px;
     }
     .saju-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    .saju-section h1 {
+        font-size: 30px;
+    }
+    .saju-section .intro-text {
+        font-size: 16px;
+    }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .saju-grid {
         grid-template-columns: 1fr;
+    }
+    .saju-pillar p {
+        font-size: 24px;
     }
 }

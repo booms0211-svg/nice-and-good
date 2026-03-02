@@ -1,3 +1,4 @@
+
 import { calculateSaju } from 'https://esm.sh/@fullstackfamily/manseryeok';
 
 const calculateBtn = document.getElementById('calculate-btn');
@@ -9,8 +10,11 @@ calculateBtn.addEventListener('click', () => {
     const day = parseInt(document.getElementById('day').value);
     const hour = parseInt(document.getElementById('hour').value);
 
+    resultDiv.classList.remove('visible');
+
     if (isNaN(year) || isNaN(month) || isNaN(day) || isNaN(hour)) {
         resultDiv.innerHTML = '<p>생년월일시를 모두 입력해주세요.</p>';
+        resultDiv.classList.add('visible');
         return;
     }
 
@@ -41,4 +45,9 @@ calculateBtn.addEventListener('click', () => {
     } catch (e) {
         resultDiv.innerHTML = `<p>사주를 계산하는 중 오류가 발생했습니다: ${e.message}</p>`;
     }
+
+    // Add visible class to trigger animation
+    setTimeout(() => {
+        resultDiv.classList.add('visible');
+    }, 10);
 });
