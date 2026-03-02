@@ -1,4 +1,3 @@
-
 import { calculateSaju } from 'https://esm.sh/@fullstackfamily/manseryeok';
 
 const calculateBtn = document.getElementById('calculate-btn');
@@ -30,19 +29,19 @@ calculateBtn.addEventListener('click', () => {
                 <div class="saju-grid">
                     <div class="saju-pillar">
                         <h3>년주 (年柱)</h3>
-                        <p>${saju.yearPillar.join(' ')}</p>
+                        <p>${saju.yearPillar} <span>${saju.yearPillarHanja}</span></p>
                     </div>
                     <div class="saju-pillar">
                         <h3>월주 (月柱)</h3>
-                        <p>${saju.monthPillar.join(' ')}</p>
+                        <p>${saju.monthPillar} <span>${saju.monthPillarHanja}</span></p>
                     </div>
                     <div class="saju-pillar">
                         <h3>일주 (日柱)</h3>
-                        <p>${saju.dayPillar.join(' ')}</p>
+                        <p>${saju.dayPillar} <span>${saju.dayPillarHanja}</span></p>
                     </div>
                     <div class="saju-pillar">
                         <h3>시주 (時柱)</h3>
-                        <p>${saju.hourPillar.join(' ')}</p>
+                        <p>${saju.hourPillar} <span>${saju.hourPillarHanja}</span></p>
                     </div>
                 </div>
             `;
