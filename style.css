@@ -239,6 +239,32 @@ body {
     margin-left: 12px;
 }
 
+.analysis-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.analysis-section h2 {
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+}
+
+.analysis-section p {
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.analysis-section p strong {
+    color: var(--accent-red);
+    font-weight: 600;
+}
+
+
 /* ===== AdSense Content Section ===== */
 .content-section {
     text-align: center;
